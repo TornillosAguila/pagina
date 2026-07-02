@@ -8,11 +8,16 @@ Esta es una **vista previa (v2)** para validación del cliente. Sitio estático,
 
 ---
 
+## Ajustes v3.4
+
+- Botón **Plataforma Águila** del menú: ahora usa el **rostro recortado de la mascota** con fondo transparente (`assets/img/bot-rostro.webp`, óvalo con borde suave y cuello degradado) en lugar del PNG con fondo.
+
 ## Ajustes v3.1
 
 - La mascota del Bot ya **no trae el globo de WhatsApp en la mano** (imagen editada, `assets/img/mascota-bot.webp` y `mascota-bot-sinwa.png`).
 - La **Guía Águila ya no se desplaza** entre esquinas: se **desmaterializa y rematerializa** con una animación tipo sistema (glitch por franjas, aberración cromática cian/magenta y línea de escaneo).
-- Sin sombra de piso bajo la guía (diseño más limpio).
+- Sin sombra de piso bajo la guía ni en el PNG (diseño más limpio).
+- Mascota de la tarjeta Bot: proporción corregida (height:auto) y tamaño reducido a 112px; limpieza fina de restos oscuros del globo en cabeza y mano.
 - La guía **voltea hacia el centro** de la página según la esquina donde aparece y es **15% más pequeña** (100px / 73px móvil).
 - La mascota de la tarjeta "Bot Águila 24/7" ahora es más pequeña (132px) y ya no invade el texto del bloque.
 - Se eliminó el bloque **Meta 2030**.
