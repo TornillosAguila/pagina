@@ -31,7 +31,7 @@
     --grad:linear-gradient(100deg,#FF8A2B,#F2761E 40%,#E8431C);
     --grad-soft:linear-gradient(120deg,rgba(255,138,43,.16),rgba(232,67,28,.05));
     --r-lg:24px; --r-md:18px;
-    --e-out:cubic-bezier(.2,.8,.2,1); --e-fly:cubic-bezier(.45,.05,.2,1.1);
+    --e-out:cubic-bezier(.2,.8,.2,1);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -196,8 +196,9 @@
   .eco-card .btn{align-self:flex-start;margin-top:auto}
   .eco-bot{background:linear-gradient(150deg,rgba(37,211,102,.09),rgba(242,118,30,.06));border-color:rgba(37,211,102,.25)}
   .eco-bot:hover{border-color:rgba(37,211,102,.5)}
-  .eco-mascota{position:absolute;right:-14px;bottom:-16px;width:190px;filter:drop-shadow(0 18px 34px rgba(0,0,0,.5));transform:rotate(-3deg);transition:.5s var(--e-out);pointer-events:none}
-  .eco-card:hover .eco-mascota{transform:rotate(0) translateY(-8px) scale(1.04)}
+  .eco-bot{padding-right:158px}
+  .eco-mascota{position:absolute;right:16px;bottom:0;width:132px;filter:drop-shadow(0 14px 26px rgba(0,0,0,.5));transition:.5s var(--e-out);pointer-events:none}
+  .eco-card:hover .eco-mascota{transform:translateY(-6px) scale(1.03)}
   .eco-lista{list-style:none;display:grid;gap:10px;margin:6px 0}
   .eco-lista li{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:.95rem}
   .eco-lista li::before{content:"→";color:var(--amber);font-weight:700}
@@ -227,14 +228,6 @@
   .mv:hover{border-color:rgba(242,118,30,.35);transform:translateY(-4px)}
   .mv h3{font-size:1.6rem;margin:12px 0}
   .mv p{color:var(--muted)}
-  .meta{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr auto;gap:36px;align-items:center;background:var(--grad-soft);border:1px solid rgba(242,118,30,.3);border-radius:22px;padding:36px}
-  .meta .y{font-family:'Syne',sans-serif;font-weight:800;font-size:5rem;line-height:.85;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .meta h3{color:#fff;margin:0 0 6px}
-  .meta p{color:var(--muted)}
-  .meta-kpis{display:flex;gap:22px}
-  .meta-kpis div{text-align:center}
-  .meta-kpis b{display:block;font-family:'Syne',sans-serif;font-size:1.6rem;color:var(--amber)}
-  .meta-kpis span{font-size:.75rem;color:var(--dim);letter-spacing:1px;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
   .lema{grid-column:1/-1;text-align:center;font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.6rem,4vw,2.6rem);letter-spacing:-1px;padding:14px 0}
   .valores{display:flex;flex-wrap:wrap;gap:11px;margin-top:30px}
   .valores span{border:1px solid var(--panel-line);border-radius:50px;padding:11px 22px;font-size:.85rem;color:var(--paper);transition:.25s;cursor:default}
@@ -304,23 +297,67 @@
   .subir.visible{opacity:1;visibility:visible;transform:none}
   .subir:hover{border-color:var(--amber);box-shadow:0 0 14px rgba(255,138,43,.4)}
 
-  /* ===== GUÍA ÁGUILA (mascota en 4 esquinas) ===== */
-  #guia{position:fixed;left:0;top:0;z-index:1000;width:118px;transform:translate3d(-200px,-200px,0);transition:transform 1.7s var(--e-fly);pointer-events:none}
+  /* ===== GUÍA ÁGUILA (mascota en 4 esquinas · aparición digital) ===== */
+  #guia{position:fixed;left:0;top:0;z-index:1000;width:100px;transform:translate3d(-200px,-200px,0);pointer-events:none}
   #guia.listo{pointer-events:auto}
-  .guia-bot{position:relative;width:118px;cursor:pointer;-webkit-tap-highlight-color:transparent}
-  .guia-bot img{width:100%;height:auto;filter:drop-shadow(0 14px 26px rgba(0,0,0,.55)) drop-shadow(0 0 18px rgba(255,138,43,.22));transition:transform .5s var(--e-out)}
-  #guia.mira-der .guia-bot img{transform:scaleX(-1)}
-  #guia.volando .guia-bot img{animation:aleteo .5s ease-in-out infinite}
-  #guia.mira-der.volando .guia-bot img{animation:aleteoR .5s ease-in-out infinite}
-  @keyframes aleteo{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-14px) rotate(4deg)}}
-  @keyframes aleteoR{0%,100%{transform:scaleX(-1) translateY(0) rotate(5deg)}50%{transform:scaleX(-1) translateY(-14px) rotate(-4deg)}}
-  #guia:not(.volando) .guia-bot img{animation:idle-bot 3.4s ease-in-out infinite}
-  #guia.mira-der:not(.volando) .guia-bot img{animation:idle-botR 3.4s ease-in-out infinite}
+  .guia-bot{position:relative;width:100px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .guia-bot img{width:100%;height:auto;filter:drop-shadow(0 14px 26px rgba(0,0,0,.55)) drop-shadow(0 0 18px rgba(255,138,43,.22))}
+  /* la mascota mira hacia el centro de la página: en las esquinas derechas se espeja */
+  #guia.mira-izq .guia-bot img{transform:scaleX(-1)}
+  #guia:not(.aparece):not(.desaparece) .guia-bot img{animation:idle-bot 3.4s ease-in-out infinite}
+  #guia.mira-izq:not(.aparece):not(.desaparece) .guia-bot img{animation:idle-botR 3.4s ease-in-out infinite}
   @keyframes idle-bot{50%{transform:translateY(-7px)}}
   @keyframes idle-botR{0%,100%{transform:scaleX(-1)}50%{transform:scaleX(-1) translateY(-7px)}}
   .guia-sombra{width:64%;height:12px;margin:2px auto 0;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.5),transparent 70%);animation:sombra 3.4s ease-in-out infinite}
   @keyframes sombra{50%{transform:scaleX(.78);opacity:.6}}
-  #guia.volando .guia-sombra{opacity:0}
+  /* --- materialización tipo sistema: glitch + escaneo + aberración cromática --- */
+  #guia.aparece .guia-bot img{animation:materializa .95s steps(1,end) forwards}
+  #guia.mira-izq.aparece .guia-bot img{animation:materializaR .95s steps(1,end) forwards}
+  @keyframes materializa{
+    0%{opacity:0;clip-path:inset(0 0 100% 0);filter:brightness(3) saturate(0) drop-shadow(-4px 0 0 #0ff) drop-shadow(4px 0 0 #f0f)}
+    12%{opacity:1;clip-path:inset(0 0 62% 0)}
+    22%{opacity:.25;clip-path:inset(18% 0 34% 0)}
+    32%{opacity:1;clip-path:inset(0 0 28% 0);filter:brightness(2) drop-shadow(-3px 0 0 #0ff) drop-shadow(3px 0 0 #f0f)}
+    44%{opacity:.55;clip-path:inset(40% 0 8% 0);transform:translateX(3px)}
+    56%{opacity:1;clip-path:inset(0 0 6% 0);transform:translateX(-2px)}
+    68%{opacity:.8;clip-path:inset(6% 0 0 0);filter:brightness(1.5) drop-shadow(-1px 0 0 #0ff) drop-shadow(1px 0 0 #f0f)}
+    80%{opacity:1;clip-path:inset(0);transform:none}
+    88%{opacity:.9;filter:brightness(1.2)}
+    100%{opacity:1;clip-path:inset(0);filter:drop-shadow(0 14px 26px rgba(0,0,0,.55)) drop-shadow(0 0 18px rgba(255,138,43,.22))}
+  }
+  @keyframes materializaR{
+    0%{opacity:0;clip-path:inset(0 0 100% 0);filter:brightness(3) saturate(0) drop-shadow(-4px 0 0 #0ff) drop-shadow(4px 0 0 #f0f);transform:scaleX(-1)}
+    12%{opacity:1;clip-path:inset(0 0 62% 0);transform:scaleX(-1)}
+    22%{opacity:.25;clip-path:inset(18% 0 34% 0);transform:scaleX(-1)}
+    32%{opacity:1;clip-path:inset(0 0 28% 0);filter:brightness(2) drop-shadow(-3px 0 0 #0ff) drop-shadow(3px 0 0 #f0f);transform:scaleX(-1)}
+    44%{opacity:.55;clip-path:inset(40% 0 8% 0);transform:scaleX(-1) translateX(3px)}
+    56%{opacity:1;clip-path:inset(0 0 6% 0);transform:scaleX(-1) translateX(-2px)}
+    68%{opacity:.8;clip-path:inset(6% 0 0 0);filter:brightness(1.5) drop-shadow(-1px 0 0 #0ff) drop-shadow(1px 0 0 #f0f);transform:scaleX(-1)}
+    80%{opacity:1;clip-path:inset(0);transform:scaleX(-1)}
+    88%{opacity:.9;filter:brightness(1.2);transform:scaleX(-1)}
+    100%{opacity:1;clip-path:inset(0);transform:scaleX(-1);filter:drop-shadow(0 14px 26px rgba(0,0,0,.55)) drop-shadow(0 0 18px rgba(255,138,43,.22))}
+  }
+  #guia.desaparece .guia-bot img{animation:desmaterializa .32s steps(1,end) forwards}
+  #guia.mira-izq.desaparece .guia-bot img{animation:desmaterializaR .32s steps(1,end) forwards}
+  @keyframes desmaterializa{
+    0%{opacity:1;clip-path:inset(0)}
+    30%{opacity:.7;clip-path:inset(30% 0 20% 0);filter:brightness(2) drop-shadow(-3px 0 0 #0ff) drop-shadow(3px 0 0 #f0f)}
+    60%{opacity:.4;clip-path:inset(10% 0 60% 0);transform:translateX(-3px)}
+    100%{opacity:0;clip-path:inset(0 0 100% 0)}
+  }
+  @keyframes desmaterializaR{
+    0%{opacity:1;clip-path:inset(0);transform:scaleX(-1)}
+    30%{opacity:.7;clip-path:inset(30% 0 20% 0);filter:brightness(2) drop-shadow(-3px 0 0 #0ff) drop-shadow(3px 0 0 #f0f);transform:scaleX(-1)}
+    60%{opacity:.4;clip-path:inset(10% 0 60% 0);transform:scaleX(-1) translateX(-3px)}
+    100%{opacity:0;clip-path:inset(0 0 100% 0);transform:scaleX(-1)}
+  }
+  /* línea de escaneo que recorre a la mascota al materializarse */
+  .guia-bot::after{content:"";position:absolute;left:6%;right:6%;top:0;height:2px;border-radius:2px;
+    background:linear-gradient(90deg,transparent,rgba(0,255,240,.9),rgba(255,138,43,.9),transparent);
+    box-shadow:0 0 12px rgba(0,255,240,.6);opacity:0;pointer-events:none}
+  #guia.aparece .guia-bot::after{animation:escaneo .95s linear forwards}
+  @keyframes escaneo{0%{opacity:1;top:0}85%{opacity:1;top:96%}100%{opacity:0;top:100%}}
+  #guia.aparece .guia-sombra,#guia.desaparece .guia-sombra{opacity:0}
 
   .guia-burbuja{position:absolute;width:264px;background:rgba(17,19,25,.94);border:1px solid rgba(242,118,30,.45);border-radius:18px;padding:16px 16px 14px;
     backdrop-filter:blur(14px);box-shadow:0 18px 44px rgba(0,0,0,.55),0 0 22px rgba(255,138,43,.12);
@@ -336,7 +373,7 @@
   .guia-cta:hover{background:var(--grad);color:#120a04;border-color:transparent}
   .guia-barra{height:2px;border-radius:2px;background:rgba(255,255,255,.08);margin-top:12px;overflow:hidden}
   .guia-barra i{display:block;height:100%;width:100%;background:var(--grad);transform-origin:0 50%;transform:scaleX(0)}
-  #guia.hablando:not(.pausado) .guia-barra i{animation:tip-t var(--tip-dur,6s) linear forwards}
+  #guia.hablando:not(.pausado):not(.aparece) .guia-barra i{animation:tip-t var(--tip-dur,6s) linear forwards}
   @keyframes tip-t{from{transform:scaleX(0)}to{transform:scaleX(1)}}
   .guia-ctrl{position:absolute;display:flex;gap:6px;opacity:0;transition:.3s}
   #guia:hover .guia-ctrl,#guia:focus-within .guia-ctrl{opacity:1}
@@ -344,8 +381,8 @@
   .guia-ctrl button:hover{border-color:var(--amber);color:var(--amber)}
   #guia.pausado .guia-play{color:var(--amber);border-color:var(--amber)}
   /* burbuja según esquina */
-  #guia[data-c="br"] .guia-burbuja,#guia[data-c="tr"] .guia-burbuja{right:126px;--crx:-8px;--cx:auto;--ori:right center;--clip:polygon(0 0,100% 0,100% 100%)}
-  #guia[data-c="bl"] .guia-burbuja,#guia[data-c="tl"] .guia-burbuja{left:126px;--cx:-8px;--crx:auto;--ori:left center;--clip:polygon(0 0,0 100%,100% 100%)}
+  #guia[data-c="br"] .guia-burbuja,#guia[data-c="tr"] .guia-burbuja{right:108px;--crx:-8px;--cx:auto;--ori:right center;--clip:polygon(0 0,100% 0,100% 100%)}
+  #guia[data-c="bl"] .guia-burbuja,#guia[data-c="tl"] .guia-burbuja{left:108px;--cx:-8px;--crx:auto;--ori:left center;--clip:polygon(0 0,0 100%,100% 100%)}
   #guia[data-c="br"] .guia-burbuja,#guia[data-c="bl"] .guia-burbuja{bottom:6px;--cy:auto}
   #guia[data-c="br"] .guia-burbuja::before,#guia[data-c="bl"] .guia-burbuja::before{top:auto;bottom:26px}
   #guia[data-c="tr"] .guia-burbuja,#guia[data-c="tl"] .guia-burbuja{top:6px}
@@ -380,9 +417,8 @@
     .marca-anclas{grid-template-columns:1fr}
     .logo-wall{grid-template-columns:repeat(3,1fr)}
     .eco-grid,.mv-grid,.cotiza-grid,.ubica-grid{grid-template-columns:1fr}
-    .eco-mascota{width:150px}
-    .meta{grid-template-columns:1fr;text-align:center}.meta .y{font-size:3.6rem}
-    .meta-kpis{justify-content:center}
+    .eco-bot{padding-right:24px;padding-bottom:120px}
+    .eco-mascota{width:104px;right:12px}
     .foot-grid{grid-template-columns:1fr 1fr;gap:28px}
     .cotiza-grid{gap:30px}
   }
@@ -402,15 +438,13 @@
     .stat{padding:22px 18px}.stat .n{font-size:2.4rem}
     .marquee .track{gap:34px}.marquee span{font-size:.92rem;gap:34px}
     .foot-grid{grid-template-columns:1fr}
-    .meta{padding:26px}.meta .y{font-size:3rem}
-    .meta-kpis{flex-wrap:wrap;gap:14px}
     .mv,.horario,form,.pcard,.eco-card{padding:24px}
     .valores span{padding:9px 16px;font-size:.8rem}
-    #guia{width:86px}
-    .guia-bot{width:86px}
-    .guia-burbuja{width:min(228px,calc(100vw - 118px));padding:13px 13px 11px}
-    #guia[data-c="br"] .guia-burbuja,#guia[data-c="tr"] .guia-burbuja{right:94px}
-    #guia[data-c="bl"] .guia-burbuja,#guia[data-c="tl"] .guia-burbuja{left:94px}
+    #guia{width:73px}
+    .guia-bot{width:73px}
+    .guia-burbuja{width:min(228px,calc(100vw - 104px));padding:13px 13px 11px}
+    #guia[data-c="br"] .guia-burbuja,#guia[data-c="tr"] .guia-burbuja{right:81px}
+    #guia[data-c="bl"] .guia-burbuja,#guia[data-c="tl"] .guia-burbuja{left:81px}
     .subir{right:20px;bottom:92px;width:44px;height:44px}
     .guia-reabrir{left:16px;bottom:16px;font-size:.76rem}
   }
@@ -425,7 +459,6 @@
   @media(prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
     .reveal{opacity:1!important;transform:none!important}
-    #guia{transition:none}
   }
 </style>
 </head>
@@ -599,15 +632,6 @@
       <div class="lema reveal grad-text">“La superación es nuestro trabajo diario.”</div>
       <div class="mv reveal"><span class="mono">Misión</span><h3>A dónde apuntamos</h3><p>Consolidarnos como una empresa de mayoreo líder en el sector ferretero, eléctrico, refaccionario, tornillero, agrícola, pinturas y complementos; satisfaciendo las necesidades de nuestros clientes mediante productos de óptima calidad, respaldados por un servicio eficiente, confiable y profesional.</p></div>
       <div class="mv reveal"><span class="mono">Visión</span><h3>Cómo nos vemos</h3><p>Ser una empresa confiable y líder a nivel regional en la comercialización de nuestros productos, ofreciendo un amplio surtido, disponibilidad inmediata, calidad y un enfoque permanente en la mejora continua.</p></div>
-      <div class="meta reveal">
-        <div class="y">2030</div>
-        <div><span class="mono">Meta</span><h3>Un grupo empresarial sólido</h3><p>Un corporativo y tres tiendas especializadas, impulsados por la mejora continua.</p></div>
-        <div class="meta-kpis">
-          <div><b data-cont="150">0</b><span>Colaboradores</span></div>
-          <div><b data-cont="250" data-pre="$" data-suf="M">0</b><span>Ventas anuales</span></div>
-          <div><b data-cont="3">0</b><span>Tiendas</span></div>
-        </div>
-      </div>
     </div>
     <div class="valores reveal">
       <span>Trabajo en equipo</span><span>Respeto y empatía</span><span>Servicio y calidad</span><span>Honestidad</span><span>Responsabilidad y compromiso</span><span>Mejora continua</span>
@@ -868,7 +892,7 @@ window.enviarWA = function(e){
       btnPlay = document.getElementById('guia-play'), btnCerrar = document.getElementById('guia-cerrar'),
       btnReabrir = document.getElementById('guia-reabrir'), bot = document.getElementById('guia-bot');
 
-  var TIP_MS = 6000, VUELO_MS = 1700;
+  var TIP_MS = 6000, APARECE_MS = 950, DESAPARECE_MS = 320;
 
   var TIPS = [
     {k:'Bot 24/7',      t:'Bot Águila, siempre despierto',   p:'Pregúntale productos, precios y disponibilidad por WhatsApp al 618 818 2655, a cualquier hora.', a:['Chatear con el Bot','https://wa.me/526188182655?text=Hola%2C%20quiero%20usar%20el%20Bot%20%C3%81guila.']},
@@ -893,20 +917,19 @@ window.enviarWA = function(e){
   var iTip = -1, iEsq = 0, timer = null, pausado = false, sobre = false, cerrado = false, oculta = document.hidden;
 
   function coords(c){
-    var W = guia.offsetWidth || 118, H = guia.offsetHeight || 150;
+    var W = guia.offsetWidth || 100, H = guia.offsetHeight || 150;
     var mX = 20, mTop = 88, mBot = 20;
     var brBot = 96; /* deja libre el botón de WhatsApp */
     var x = (c === 'br' || c === 'tr') ? innerWidth - W - mX : mX;
     var y = (c === 'tl' || c === 'tr') ? mTop : innerHeight - H - (c === 'br' ? brBot : mBot);
     return [Math.round(x), Math.round(y)];
   }
-  function coloca(c, instantaneo){
+  function coloca(c){
     var xy = coords(c);
-    if(instantaneo) guia.style.transition = 'none';
     guia.style.transform = 'translate3d(' + xy[0] + 'px,' + xy[1] + 'px,0)';
-    if(instantaneo){ void guia.offsetWidth; guia.style.transition = ''; }
     guia.dataset.c = c;
-    guia.classList.toggle('mira-der', c === 'bl' || c === 'tl');
+    /* la mascota original mira a la derecha: en esquinas derechas se espeja para ver al centro */
+    guia.classList.toggle('mira-izq', c === 'br' || c === 'tr');
   }
   function muestraTip(n){
     var tip = TIPS[n];
@@ -920,32 +943,40 @@ window.enviarWA = function(e){
     } else { elA.hidden = true; }
     guia.style.setProperty('--tip-dur', TIP_MS + 'ms');
     guia.classList.add('hablando');
-    /* reinicia la barra de tiempo */
     var barra = guia.querySelector('.guia-barra i');
     barra.style.animation = 'none'; void barra.offsetWidth; barra.style.animation = '';
   }
-  function siguiente(volar){
+  var enTransito = false;
+  function siguiente(){
+    if(enTransito) return;
     iTip = (iTip + 1) % TIPS.length;
-    if(volar === false || reduceMotion){
-      coloca(ESQUINAS[iEsq], reduceMotion);
-      iEsq = (iEsq + 1) % ESQUINAS.length;
+    var esq = ESQUINAS[iEsq];
+    iEsq = (iEsq + 1) % ESQUINAS.length;
+    if(reduceMotion){
+      guia.classList.remove('hablando');
+      coloca(esq);
       muestraTip(iTip);
       return;
     }
+    enTransito = true;
     guia.classList.remove('hablando');
-    guia.classList.add('volando');
-    coloca(ESQUINAS[iEsq]);
-    iEsq = (iEsq + 1) % ESQUINAS.length;
+    guia.classList.add('desaparece');
     setTimeout(function(){
-      guia.classList.remove('volando');
-      muestraTip(iTip);
-    }, VUELO_MS);
+      guia.classList.remove('desaparece');
+      coloca(esq); /* teletransporte: reaparece en la nueva esquina */
+      guia.classList.add('aparece');
+      setTimeout(function(){
+        guia.classList.remove('aparece');
+        muestraTip(iTip);
+        enTransito = false;
+      }, APARECE_MS);
+    }, DESAPARECE_MS);
   }
   function arranca(){
     para();
     timer = setInterval(function(){
       if(!pausado && !sobre && !oculta && !cerrado) siguiente();
-    }, TIP_MS + (reduceMotion ? 0 : VUELO_MS));
+    }, TIP_MS + (reduceMotion ? 0 : APARECE_MS + DESAPARECE_MS));
   }
   function para(){ if(timer){ clearInterval(timer); timer = null; } }
 
@@ -970,14 +1001,13 @@ window.enviarWA = function(e){
     cerrado = false;
     guia.style.display = '';
     btnReabrir.classList.remove('visible');
-    coloca(guia.dataset.c, true);
-    siguiente(false); arranca();
+    siguiente(); arranca();
     try{ sessionStorage.removeItem('guiaCerrada'); }catch(e){}
   });
   document.addEventListener('visibilitychange', function(){ oculta = document.hidden; });
-  addEventListener('resize', function(){ if(!cerrado) coloca(guia.dataset.c, true); });
+  addEventListener('resize', function(){ if(!cerrado && !enTransito) coloca(guia.dataset.c); });
 
-  /* arranque: entra volando desde fuera hacia la esquina inferior derecha */
+  /* arranque: se materializa en la esquina inferior derecha */
   var cerradaAntes = false;
   try{ cerradaAntes = sessionStorage.getItem('guiaCerrada') === '1'; }catch(e){}
   if(cerradaAntes){
@@ -985,19 +1015,16 @@ window.enviarWA = function(e){
   } else {
     setTimeout(function(){
       guia.classList.add('listo');
-      if(reduceMotion){ coloca('br', true); iEsq = 1; muestraTip(iTip = 0); arranca(); return; }
-      guia.style.transition = 'none';
-      guia.style.transform = 'translate3d(' + (innerWidth + 140) + 'px,' + Math.round(innerHeight * .35) + 'px,0)';
-      void guia.offsetWidth; guia.style.transition = '';
-      guia.classList.add('volando');
       coloca('br');
       iEsq = 1;
+      if(reduceMotion){ muestraTip(iTip = 0); arranca(); return; }
+      guia.classList.add('aparece');
       setTimeout(function(){
-        guia.classList.remove('volando');
+        guia.classList.remove('aparece');
         muestraTip(iTip = 0);
         arranca();
-      }, VUELO_MS);
-    }, 1600);
+      }, APARECE_MS);
+    }, 1400);
   }
 })();
 

@@ -8,6 +8,14 @@ Esta es una **vista previa (v2)** para validación del cliente. Sitio estático,
 
 ---
 
+## Ajustes v3.1
+
+- La mascota del Bot ya **no trae el globo de WhatsApp en la mano** (imagen editada, `assets/img/mascota-bot.webp` y `mascota-bot-sinwa.png`).
+- La **Guía Águila ya no se desplaza** entre esquinas: se **desmaterializa y rematerializa** con una animación tipo sistema (glitch por franjas, aberración cromática cian/magenta y línea de escaneo).
+- La guía **voltea hacia el centro** de la página según la esquina donde aparece y es **15% más pequeña** (100px / 73px móvil).
+- La mascota de la tarjeta "Bot Águila 24/7" ahora es más pequeña (132px) y ya no invade el texto del bloque.
+- Se eliminó el bloque **Meta 2030**.
+
 ## Novedades v3 (upgrade premium)
 
 - **Guía Águila 🦅** — la mascota del Bot Águila vuela entre las 4 esquinas de la pantalla y da un consejo distinto cada 6 segundos con datos reales de la empresa (Plataforma Águila, Bot 24/7, contactos, ubicación, horario, misión, visión, Meta 2030, valores, líneas, marcas). Con controles de pausa/cierre, memoria de sesión, `aria-live` y soporte de `prefers-reduced-motion`. Asset: `assets/img/mascota-bot.webp` (25 KB, optimizado desde el PNG original).
