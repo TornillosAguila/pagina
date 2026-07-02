@@ -308,8 +308,6 @@
   #guia.mira-izq:not(.aparece):not(.desaparece) .guia-bot img{animation:idle-botR 3.4s ease-in-out infinite}
   @keyframes idle-bot{50%{transform:translateY(-7px)}}
   @keyframes idle-botR{0%,100%{transform:scaleX(-1)}50%{transform:scaleX(-1) translateY(-7px)}}
-  .guia-sombra{width:64%;height:12px;margin:2px auto 0;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.5),transparent 70%);animation:sombra 3.4s ease-in-out infinite}
-  @keyframes sombra{50%{transform:scaleX(.78);opacity:.6}}
   /* --- materialización tipo sistema: glitch + escaneo + aberración cromática --- */
   #guia.aparece .guia-bot img{animation:materializa .95s steps(1,end) forwards}
   #guia.mira-izq.aparece .guia-bot img{animation:materializaR .95s steps(1,end) forwards}
@@ -357,7 +355,6 @@
     box-shadow:0 0 12px rgba(0,255,240,.6);opacity:0;pointer-events:none}
   #guia.aparece .guia-bot::after{animation:escaneo .95s linear forwards}
   @keyframes escaneo{0%{opacity:1;top:0}85%{opacity:1;top:96%}100%{opacity:0;top:100%}}
-  #guia.aparece .guia-sombra,#guia.desaparece .guia-sombra{opacity:0}
 
   .guia-burbuja{position:absolute;width:264px;background:rgba(17,19,25,.94);border:1px solid rgba(242,118,30,.45);border-radius:18px;padding:16px 16px 14px;
     backdrop-filter:blur(14px);box-shadow:0 18px 44px rgba(0,0,0,.55),0 0 22px rgba(255,138,43,.12);
@@ -731,7 +728,6 @@
   </div>
   <div class="guia-bot" id="guia-bot" title="Toca para ver otro consejo">
     <img src="./assets/img/mascota-bot.webp" alt="Mascota Bot Águila" width="303" height="360" fetchpriority="low">
-    <div class="guia-sombra"></div>
   </div>
 </div>
 <button class="guia-reabrir" id="guia-reabrir" aria-label="Mostrar guía Águila"><img src="./assets/img/mascota-bot.webp" alt="">Guía Águila</button>
