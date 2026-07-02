@@ -1,8 +1,25 @@
-# Grupo Águila — Landing page (preview v2)
+# Grupo Águila — Landing page (v3 · upgrade premium)
 
 Sitio de una sola página (landing) para **Grupo Águila / Tornillos Águila, S.A. de C.V.**, distribuidora de mayoreo en Durango: tornillería, herramienta, ferretería, material eléctrico, refacciones, línea agrícola, pinturas y maquinaria (bombas y generadores Evans).
 
 Esta es una **vista previa (v2)** para validación del cliente. Sitio estático, sin backend, listo para **GitHub Pages**.
+
+
+
+---
+
+## Novedades v3 (upgrade premium)
+
+- **Guía Águila 🦅** — la mascota del Bot Águila vuela entre las 4 esquinas de la pantalla y da un consejo distinto cada 6 segundos con datos reales de la empresa (Plataforma Águila, Bot 24/7, contactos, ubicación, horario, misión, visión, Meta 2030, valores, líneas, marcas). Con controles de pausa/cierre, memoria de sesión, `aria-live` y soporte de `prefers-reduced-motion`. Asset: `assets/img/mascota-bot.webp` (25 KB, optimizado desde el PNG original).
+- **Preloader** con logo animado y **barra de progreso de scroll** en degradado ámbar.
+- **Scroll suave (Lenis)** + **parallax y reveals (GSAP/ScrollTrigger)** vía CDN, con *degradación elegante*: si el CDN no carga, la página funciona igual con IntersectionObserver nativo.
+- **Sección nueva "Ecosistema digital"**: tarjetas destacadas de Plataforma Águila B2B y Bot Águila 24/7 (con la mascota), borde cónico animado.
+- **Sección nueva "Cómo cotizar"** (4 pasos) y **FAQ** con acordeón + datos estructurados `FAQPage` para SEO.
+- **Meta 2030** con contadores animados (150 colaboradores · $250M · 3 tiendas).
+- **Badge "Abierto / Cerrado ahora"** calculado en vivo con la hora de Durango (`Intl.DateTimeFormat`, zona America/Monterrey).
+- Tarjetas de producto con **tilt 3D** y glow que sigue el cursor; botones **magnéticos** con brillo de barrido; enlace activo en el menú según sección visible.
+- Botón **volver arriba**, focos de teclado visibles, mejoras SEO (canonical, Twitter Card, og:locale).
+- Se respetó al 100% la colorimetría, tipografías y esencia de la v2. Respaldo del index anterior en `docs/index-v2-respaldo.html`.
 
 ---
 
