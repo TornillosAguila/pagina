@@ -73,8 +73,8 @@
   .btn-amber:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(242,118,30,.5)}
   .btn-ghost{background:rgba(255,255,255,.04);border-color:var(--panel-line);color:var(--paper);backdrop-filter:blur(6px)}
   .btn-ghost:hover{border-color:var(--amber);color:#fff}
-  .btn-neon{background:rgba(255,255,255,.03);color:#fff;border:1.6px solid var(--amber);
-    box-shadow:0 0 7px rgba(255,138,43,.55),inset 0 0 6px rgba(255,138,43,.22);text-shadow:0 0 6px rgba(255,138,43,.35)}
+  .btn-neon{background:rgba(255,255,255,.03);color:#fff;border:1.5px solid var(--amber);
+    box-shadow:0 0 6px rgba(255,138,43,.4),inset 0 0 5px rgba(255,138,43,.16);text-shadow:0 0 5px rgba(255,138,43,.3)}
   .btn-neon:hover{border-color:var(--amber-2);transform:translateY(-2px);
     box-shadow:0 0 15px rgba(255,138,43,.9),0 0 30px rgba(242,118,30,.5),inset 0 0 10px rgba(255,138,43,.35)}
   .btn-wa{background:var(--wa);color:#052e16;box-shadow:0 8px 26px rgba(37,211,102,.35)}
@@ -86,18 +86,20 @@
   /* ===== NAV ===== */
   nav{position:fixed;top:0;left:0;right:0;z-index:1100;transition:.4s}
   nav.scrolled{background:rgba(12,13,16,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--panel-line)}
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 28px}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:9px 28px;gap:14px}
   .brand{display:flex;align-items:center;gap:12px}
-  .brand .logo{width:46px;height:46px;background:var(--logo) center/contain no-repeat;transition:transform .4s var(--e-out)}
+  .brand .logo{width:38px;height:38px;background:var(--logo) center/contain no-repeat;transition:transform .4s var(--e-out)}
   .brand:hover .logo{transform:rotate(-8deg) scale(1.06)}
-  .brand .txt{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;letter-spacing:.5px;line-height:1;color:var(--amber)}
+  .brand .txt{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.5px;line-height:1;color:var(--amber)}
   .brand .txt small{display:block;font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:3px;color:var(--amber);font-weight:400;margin-top:3px}
-  .menu{display:flex;gap:18px;align-items:center}
+  .menu{display:flex;gap:15px;align-items:center}
   .menu a{font-size:.9rem;font-weight:500;color:var(--muted);transition:.2s;position:relative}
   .menu a.nav-link::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--amber);transition:.3s}
   .menu a.nav-link:hover,.menu a.nav-link.activo{color:#fff}
   .menu a.nav-link:hover::after,.menu a.nav-link.activo::after{width:100%}
-  .menu .nav-btn{padding:9px 15px;font-size:.82rem;border-radius:40px;gap:7px}
+    .menu .nav-btn{padding:7px 13px;font-size:.75rem;border-radius:40px;gap:6px;white-space:nowrap}
+  .menu .nav-btn .ico{width:16px;height:16px}
+  .menu .nav-btn .emo{font-size:.9rem}
   .menu .nav-btn::after{display:none}
   .hamb{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0;padding:8px}
   .hamb span{width:26px;height:2px;background:#fff;border-radius:2px;transition:.3s}
@@ -172,11 +174,22 @@
 
   /* ===== MURO DE LOGOS ===== */
   .logo-wall{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-  .logo-chip{background:#fff;border:1px solid var(--panel-line);border-radius:16px;padding:16px 14px 12px;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:118px;transition:transform .28s var(--e-out),box-shadow .3s var(--e-out),border-color .25s}
-  .logo-chip:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 12px 30px rgba(0,0,0,.4);border-color:rgba(242,118,30,.5)}
-  .logo-chip img{max-height:52px;max-width:100%;width:auto;object-fit:contain}
-  .logo-chip .name{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:#6B7079;text-align:center}
+  .logo-chip{background:#fff;border:1px solid var(--panel-line);border-radius:16px;padding:18px 16px 13px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;min-height:122px;
+    transition:transform .22s var(--e-out),box-shadow .25s var(--e-out),border-color .2s}
+  .logo-chip:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(0,0,0,.45);border-color:rgba(242,118,30,.5)}
+  .logo-chip img{max-height:44px;max-width:82%;width:auto;object-fit:contain;transition:transform .22s var(--e-out)}
+  .logo-chip:hover img{transform:scale(1.05)}
+  .logo-chip.alto img{max-height:62px}
+  .logo-chip .name{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:1.5px;text-transform:uppercase;color:#6B7079;text-align:center}
+  /* marcas con lienzo propio (fondo de color de la marca) */
+  .logo-chip.oscuro{background:#0B0B0C}
+  .logo-chip.oscuro .name{color:#8b9098}
+  .logo-chip.rojo{background:#B60718}
+  .logo-chip.rojo .name{color:rgba(255,255,255,.85)}
+  /* logos dentro de las tarjetas ancla */
+  .ancla .logo-mini{background:#fff;border-radius:10px;height:42px;padding:9px 14px;display:inline-flex;align-items:center;margin-bottom:14px}
+  .ancla .logo-mini img{max-height:100%;max-width:110px;object-fit:contain}
   .marca-anclas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:26px}
   .ancla{background:var(--grad-soft);border:1px solid rgba(242,118,30,.28);border-radius:20px;padding:26px;transition:transform .28s var(--e-out),border-color .25s}
   .ancla:hover{transform:translateY(-5px);border-color:rgba(242,118,30,.55)}
@@ -598,21 +611,26 @@
   <div class="wrap">
     <div class="sec-head reveal"><span class="mono">// Respaldo de marca</span><h2>Marcas y proveedores que manejamos</h2><p>Trabajamos con los líderes de cada categoría para garantizar calidad y disponibilidad.</p></div>
     <div class="marca-anclas">
-      <div class="ancla reveal"><span class="mono">Ancla 01</span><h3>Truper</h3><p>Refacciones, accesorios y herramienta para todo trabajo.</p></div>
-      <div class="ancla reveal"><span class="mono">Ancla 02</span><h3>Evans</h3><p>Soluciones en agua y energía: bombas y generadores para hogar, negocio e industria.</p></div>
-      <div class="ancla reveal"><span class="mono">Ancla 03</span><h3>Fischer</h3><p>Soluciones de fijación en acero, química y nylon.</p></div>
+      <div class="ancla reveal"><span class="logo-mini"><img src="./assets/img/marcas/truper.svg" alt="" loading="lazy"></span><span class="mono">Ancla 01</span><h3>Truper</h3><p>Refacciones, accesorios y herramienta para todo trabajo.</p></div>
+      <div class="ancla reveal"><span class="logo-mini"><img src="./assets/img/marcas/evans.webp" alt="" loading="lazy"></span><span class="mono">Ancla 02</span><h3>Evans</h3><p>Soluciones en agua y energía: bombas y generadores para hogar, negocio e industria.</p></div>
+      <div class="ancla reveal"><span class="logo-mini"><img src="./assets/img/marcas/fischer.webp" alt="" loading="lazy"></span><span class="mono">Ancla 03</span><h3>Fischer</h3><p>Soluciones de fijación en acero, química y nylon.</p></div>
     </div>
     <div class="logo-wall">
       <div class="logo-chip reveal"><img src="./assets/img/marcas/truper.svg" alt="Truper" loading="lazy"><span class="name">Truper</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/evans.png" alt="Evans" loading="lazy"><span class="name">Evans</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/birlos.png" alt="Birlos Internacionales" loading="lazy"><span class="name">Birlos Internacionales</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/ideal.png" alt="Ideal Tridon Group" loading="lazy"><span class="name">Ideal Tridon</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/pennsylvania.png" alt="Productos Pennsylvania" loading="lazy"><span class="name">Pennsylvania</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/suplast.png" alt="Suplast" loading="lazy"><span class="name">Suplast</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/victorinox.png" alt="Victorinox" loading="lazy"><span class="name">Victorinox</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/arlite.png" alt="Arlite Iluminación LED" loading="lazy"><span class="name">Arlite</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/winled.png" alt="Winled" loading="lazy"><span class="name">Winled</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/killmax.png" alt="Killmax" loading="lazy"><span class="name">Killmax</span></div>
+      <div class="logo-chip reveal"><img src="./assets/img/marcas/evans.webp" alt="Evans" loading="lazy"><span class="name">Evans</span></div>
+      <div class="logo-chip reveal"><img src="./assets/img/marcas/fischer.webp" alt="Fischer" loading="lazy"><span class="name">Fischer</span></div>
+      <div class="logo-chip reveal"><img src="./assets/img/marcas/coflex.webp" alt="Coflex" loading="lazy"><span class="name">Coflex</span></div>
+      <div class="logo-chip alto reveal"><img src="./assets/img/marcas/ecom.webp" alt="ECOM Químicos Automotrices" loading="lazy"><span class="name">ECOM</span></div>
+      <div class="logo-chip alto reveal"><img src="./assets/img/marcas/birlos.webp" alt="Birlos Internacionales" loading="lazy"><span class="name">Birlos Intl.</span></div>
+      <div class="logo-chip reveal"><img src="./assets/img/marcas/ideal.webp" alt="Ideal Tridon Group" loading="lazy"><span class="name">Ideal Tridon</span></div>
+      <div class="logo-chip reveal"><img src="./assets/img/marcas/ipesa.webp" alt="IPESA" loading="lazy"><span class="name">IPESA</span></div>
+      <div class="logo-chip alto reveal"><img src="./assets/img/marcas/pennsylvania.webp" alt="Productos Pennsylvania" loading="lazy"><span class="name">Pennsylvania</span></div>
+      <div class="logo-chip reveal"><img src="./assets/img/marcas/suplast.webp" alt="Suplast" loading="lazy"><span class="name">Suplast</span></div>
+      <div class="logo-chip rojo reveal"><img src="./assets/img/marcas/victorinox.webp" alt="Victorinox" loading="lazy"><span class="name">Victorinox</span></div>
+      <div class="logo-chip oscuro reveal"><img src="./assets/img/marcas/brotimex.webp" alt="Brotimex" loading="lazy"><span class="name">Brotimex</span></div>
+      <div class="logo-chip reveal"><img src="./assets/img/marcas/arlite.webp" alt="Arlite Iluminación LED" loading="lazy"><span class="name">Arlite</span></div>
+      <div class="logo-chip reveal"><img src="./assets/img/marcas/winled.webp" alt="Winled" loading="lazy"><span class="name">Winled</span></div>
+      <div class="logo-chip reveal"><img src="./assets/img/marcas/killmax.webp" alt="Killmax" loading="lazy"><span class="name">Killmax</span></div>
     </div>
   </div>
 </section>
@@ -628,7 +646,7 @@
       </div>
       <div class="serv-badges">
         <span class="b"><img src="./assets/img/marcas/truper.svg" alt="Truper" loading="lazy"></span>
-        <span class="b"><img src="./assets/img/marcas/evans.png" alt="Evans" loading="lazy"></span>
+        <span class="b"><img src="./assets/img/marcas/evans.webp" alt="Evans" loading="lazy"></span>
         <span class="tag-auth">Servicio autorizado</span>
       </div>
     </div>

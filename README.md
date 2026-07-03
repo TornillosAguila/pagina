@@ -12,6 +12,14 @@ Esta es una **vista previa (v2)** para validación del cliente. Sitio estático,
 
 - Botón **Plataforma Águila** del menú: ahora usa el **rostro recortado de la mascota** con fondo transparente (`assets/img/bot-rostro.webp`, óvalo con borde suave y cuello degradado) en lugar del PNG con fondo.
 
+## Novedades v3.7 — Nav compacto + muro de marcas completo
+
+- **Nav 40% más bajo**: logo 38px, botones neón compactos (7px de padding, texto en una línea, icono 16px) y glow contenido para que el menú acompañe sin competir.
+- **Muro de marcas con las 15 marcas** y pipeline uniforme de logos (PDF→render 4x, recorte automático de márgenes, webp): se agregaron **Coflex, ECOM, Brotimex, Fischer e IPESA** y se reprocesaron todas las existentes en mejor calidad.
+- Chips con lienzo de marca: Brotimex sobre negro y Victorinox sobre rojo (fidelidad de marca); logos verticales con altura óptica compensada; hover con lift + zoom sutil de 220ms.
+- Las tarjetas ancla (Truper·Evans·Fischer) ahora muestran su logo en mini-chip blanco.
+- Listas de marcas actualizadas en FAQ, JSON-LD y tips de la Guía Águila.
+
 ## Novedades v3.6 — Centro de Servicio + review de diseño
 
 - **Sección nueva "Centro de Servicio Autorizado Evans y Truper"** (`#servicio`): un *monitor de taller* con riel de 4 pestañas por tipo de energía — Eléctricas (compresores, taladros, pulidoras, bombas de agua), Combustión (generadores, desbrozadoras, podadoras), Neumáticas (clavadoras, pistolas de impacto, lijadoras) e Hidráulicas (gato de patín y de botella). El panel cambia con barrido de escaneo + entrada escalonada (~380ms, ease-out, interrumpible); indicador deslizante en el riel; auto-recorrido cada 5.5s que se pausa al pasar el cursor y **se detiene definitivamente cuando el usuario toma el control**; CTA por categoría a WhatsApp; badges Truper/Evans; accesible (roles tab/tabpanel, aria-selected, aria-live) y sin auto-avance con `prefers-reduced-motion`.
