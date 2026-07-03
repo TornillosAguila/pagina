@@ -1096,20 +1096,30 @@ if(puedeHover && !reduceMotion){
 
   /* ---- sprites: se hornean UNA vez con su glow (nada de shadowBlur por frame) ---- */
   function hornea(dibuja, S){
+    /* capa 1: la pieza en un lienzo temporal */
+    var t = document.createElement('canvas');
+    t.width = t.height = S * DPR;
+    var tx = t.getContext('2d');
+    tx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    tx.translate(S/2, S/2);
+    tx.lineWidth = 1.1;
+    tx.strokeStyle = 'rgba(255,196,140,.75)';
+    tx.fillStyle = 'rgba(242,118,30,.22)';
+    dibuja(tx, S*0.30);
+    /* capa 2: composición final = halo + copia difuminada + núcleo tenue */
     var c = document.createElement('canvas');
     c.width = c.height = S * DPR;
     var x = c.getContext('2d');
     x.setTransform(DPR, 0, 0, DPR, 0, 0);
-    x.translate(S/2, S/2);
-    /* halo de brasa */
-    var g = x.createRadialGradient(0, 0, S*0.06, 0, 0, S*0.5);
-    g.addColorStop(0, 'rgba(255,150,60,.5)');
+    var g = x.createRadialGradient(S/2, S/2, S*0.05, S/2, S/2, S*0.5);
+    g.addColorStop(0, 'rgba(255,150,60,.28)');
     g.addColorStop(1, 'rgba(232,67,28,0)');
-    x.fillStyle = g; x.fillRect(-S/2, -S/2, S, S);
-    x.lineWidth = 1.4;
-    x.strokeStyle = 'rgba(255,178,102,.95)';
-    x.fillStyle = 'rgba(242,118,30,.30)';
-    dibuja(x, S*0.30);
+    x.fillStyle = g; x.fillRect(0, 0, S, S);
+    try{ x.filter = 'blur(' + (S*0.045) + 'px)'; }catch(e){}
+    x.globalAlpha = .8; x.drawImage(t, 0, 0, S, S);      /* silueta difusa */
+    try{ x.filter = 'none'; }catch(e){}
+    x.globalAlpha = .5; x.drawImage(t, 0, 0, S, S);      /* núcleo suave */
+    x.globalAlpha = 1;
     return c;
   }
   function pTuerca(x, r){ /* hexágono con barreno */
@@ -1118,15 +1128,18 @@ if(puedeHover && !reduceMotion){
     x.closePath(); x.fill(); x.stroke();
     x.beginPath(); x.arc(0, 0, r*0.45, 0, 7); x.stroke();
   }
-  function pTornillo(x, r){ /* cabeza + vástago con cuerda */
-    x.beginPath(); x.rect(-r*0.55, -r*1.1, r*1.1, r*0.5); x.fill(); x.stroke();      /* cabeza */
-    x.beginPath(); x.rect(-r*0.3, -r*0.6, r*0.6, r*1.7); x.fill(); x.stroke();       /* vástago */
-    for(var i=0;i<4;i++){ var y = -r*0.35 + i*r*0.42;                                 /* cuerda */
-      x.beginPath(); x.moveTo(-r*0.3, y); x.lineTo(r*0.3, y + r*0.2); x.stroke(); }
+  function pTornillo(x, r){ /* cabeza redonda ranurada + vástago con cuerda y punta */
+    x.beginPath(); x.arc(0, -r*0.75, r*0.5, 0, 7); x.fill(); x.stroke();              /* cabeza */
+    x.beginPath(); x.moveTo(-r*0.26, -r*0.75); x.lineTo(r*0.26, -r*0.75); x.stroke(); /* ranura */
+    x.beginPath(); x.moveTo(-r*0.24, -r*0.3); x.lineTo(r*0.24, -r*0.3);
+    x.lineTo(r*0.24, r*0.85); x.lineTo(0, r*1.15); x.lineTo(-r*0.24, r*0.85);
+    x.closePath(); x.fill(); x.stroke();                                              /* vástago+punta */
+    for(var i=0;i<3;i++){ var y = -r*0.05 + i*r*0.36;
+      x.beginPath(); x.moveTo(-r*0.24, y); x.lineTo(r*0.24, y + r*0.16); x.stroke(); }
   }
-  function pRondana(x, r){ /* anillo */
-    x.beginPath(); x.arc(0, 0, r, 0, 7); x.fill(); x.stroke();
-    x.beginPath(); x.arc(0, 0, r*0.5, 0, 7); x.stroke();
+  function pRondana(x, r){ /* anillo fino */
+    x.beginPath(); x.arc(0, 0, r*0.85, 0, 7); x.fill(); x.stroke();
+    x.beginPath(); x.arc(0, 0, r*0.55, 0, 7); x.stroke();
   }
   function pPerno(x, r){ /* cabeza hex + espárrago corto */
     x.beginPath();
@@ -1144,9 +1157,9 @@ if(puedeHover && !reduceMotion){
     p.s   = SPRITES[(Math.random()*SPRITES.length)|0];
     p.x   = W * (0.30 + Math.random()*0.68);          /* densas hacia el águila (derecha) */
     p.y   = primero ? Math.random()*H : H + 40;
-    p.esc = 0.35 + Math.random()*0.75;                 /* tamaño */
+    p.esc = 0.18 + Math.random()*0.38;                 /* tamaño (piezas pequeñas) */
     p.vy  = 0.25 + Math.random()*0.55;                 /* asciende */
-    p.amp = 12 + Math.random()*26;                     /* vaivén */
+    p.amp = 9 + Math.random()*18;                      /* vaivén */
     p.frq = 0.4 + Math.random()*0.8;
     p.fase= Math.random()*6.28;
     p.rot = Math.random()*6.28;
@@ -1170,7 +1183,7 @@ if(puedeHover && !reduceMotion){
       if(p.y < -50) nace(p);
       var x = p.x + Math.sin(t*0.001*p.frq + p.fase) * p.amp;
       var S = 64 * p.esc;
-      ctx.globalAlpha = p.a * 0.9;
+      ctx.globalAlpha = p.a * 0.62;
       ctx.save();
       ctx.translate(x, p.y); ctx.rotate(p.rot);
       ctx.drawImage(p.s, -S/2, -S/2, S, S);

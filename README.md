@@ -12,6 +12,12 @@ Esta es una **vista previa (v2)** para validación del cliente. Sitio estático,
 
 - Botón **Plataforma Águila** del menú: ahora usa el **rostro recortado de la mascota** con fondo transparente (`assets/img/bot-rostro.webp`, óvalo con borde suave y cuello degradado) en lugar del PNG con fondo.
 
+## v4.2 — Afinado de partículas
+
+- Piezas ~50% más pequeñas (escala 0.18–0.56), opacidad global bajada a 0.62 y vaivén más corto.
+- **Difuminado horneado**: cada sprite se compone de silueta con blur + núcleo suave al 50%, en tiempo de carga (cero costo por frame).
+- Geometría refinada: tornillo con cabeza redonda ranurada y punta cónica; rondana más fina; trazos más delgados y cálidos.
+
 ## v4.1 — Lluvia ascendente de tornillería en el hero
 
 - Capa de partículas en canvas sobre el hero: **tuercas hexagonales, tornillos con cuerda, rondanas y pernos** ascienden con vaivén, giro lento y halo de brasa ámbar (mix-blend screen sobre el video).
