@@ -179,8 +179,15 @@
   .sec-head::before{content:attr(data-num);position:absolute;top:-.55em;left:-.06em;z-index:-1;
     font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(5rem,11vw,8.5rem);line-height:1;
     color:transparent;-webkit-text-stroke:1.5px var(--stroke);letter-spacing:-2px;pointer-events:none;user-select:none}
-  .sec-head h2{font-size:clamp(2.2rem,4.6vw,3.5rem);margin:14px 0}
+  .sec-head h2{font-size:clamp(2.6rem,5.4vw,4.2rem);margin:20px 0 14px}
   .sec-head p{color:var(--muted);font-size:1.08rem}
+  /* eyebrow protagonista: insignia grande con pulso (todas las secciones) */
+  .sec-head .mono,.mono-badge{display:inline-flex;align-items:center;gap:12px;font-size:.98rem;letter-spacing:5px;
+    padding:12px 22px;border:1px solid rgba(242,118,30,.45);border-radius:44px;background:rgba(242,118,30,.08);
+    box-shadow:inset 0 0 26px rgba(242,118,30,.12),0 0 22px rgba(242,118,30,.1)}
+  .sec-head .mono::before,.mono-badge::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--amber);flex:0 0 9px;
+    box-shadow:0 0 10px rgba(255,138,43,.9);animation:auth-pulso 2.2s ease-in-out infinite}
+  @keyframes auth-pulso{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.78)}}
   .outline{color:transparent;-webkit-text-stroke:1.5px var(--paper)}
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s var(--e-out),transform .6s var(--e-out)}
   .reveal.in{opacity:1;transform:none}
@@ -280,14 +287,6 @@
 
   /* ===== CENTRO DE SERVICIO (monitor de taller) ===== */
   .serv-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
-  /* eyebrow protagonista: insignia grande con pulso */
-  #servicio .sec-head .mono{display:inline-flex;align-items:center;gap:12px;font-size:.98rem;letter-spacing:5px;
-    padding:12px 22px;border:1px solid rgba(242,118,30,.45);border-radius:44px;background:rgba(242,118,30,.08);
-    box-shadow:inset 0 0 26px rgba(242,118,30,.12),0 0 22px rgba(242,118,30,.1)}
-  #servicio .sec-head .mono::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--amber);
-    box-shadow:0 0 10px rgba(255,138,43,.9);animation:auth-pulso 2.2s ease-in-out infinite}
-  @keyframes auth-pulso{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.78)}}
-  #servicio .sec-head h2{font-size:clamp(2.6rem,5.4vw,4.2rem);margin-top:20px}
   .serv-badges{display:flex;gap:10px;align-items:center;margin-bottom:8px}
   .serv-badges .b{background:linear-gradient(160deg,#F5EFE4,#E7DDCB);border-radius:12px;padding:9px 14px;display:flex;align-items:center;height:44px;box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
   .serv-badges .b img{height:22px;width:auto}
@@ -575,8 +574,8 @@
     .hero-cta .btn{justify-content:center}
     .bento,.why-grid,.pasos,.marca-anclas{grid-template-columns:1fr}
     .logo-wall{grid-template-columns:repeat(2,1fr)}
-    #servicio .sec-head .mono{font-size:.76rem;letter-spacing:3px;padding:10px 16px;gap:9px}
-    #servicio .sec-head h2{font-size:clamp(2rem,8vw,2.6rem);margin-top:16px}
+    .sec-head .mono,.mono-badge{font-size:.76rem;letter-spacing:3px;padding:10px 16px;gap:9px}
+    .sec-head h2{font-size:clamp(2rem,8vw,2.6rem);margin-top:16px}
     .stats{grid-template-columns:repeat(2,1fr);gap:12px}
     .stat{padding:22px 18px}.stat .n{font-size:2.4rem}
     .marquee .track{gap:34px}.marquee span{font-size:.92rem;gap:34px}
@@ -595,7 +594,7 @@
     .brand .txt small{display:none}
     .hero-logo{max-width:200px}
     .hero h1{font-size:1.9rem}
-    .sec-head h2{font-size:1.7rem}
+    .sec-head h2{font-size:1.9rem}
     .stat .n{font-size:2.1rem}
   }
   @media(min-width:1500px){ .wrap{max-width:1320px} }
@@ -812,7 +811,7 @@
 
 <section style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head reveal" data-num="06"><span class="mono">// Cómo cotizar</span><h2>De la lista al pedido<br>en cuatro pasos.</h2></div>
+    <div class="sec-head reveal" data-num="07"><span class="mono">// Cómo cotizar</span><h2>De la lista al pedido<br>en cuatro pasos.</h2></div>
     <div class="pasos-marco reveal" id="pasos-marco">
       <div class="pasos-linea"><i></i></div>
       <span class="pasos-nodo" style="left:12%"></span><span class="pasos-nodo" style="left:37%"></span><span class="pasos-nodo" style="left:62%"></span><span class="pasos-nodo" style="left:87%"></span>
@@ -828,7 +827,7 @@
 
 <section id="nosotros">
   <div class="wrap">
-    <div class="sec-head reveal" data-num="07"><span class="mono">// Quiénes somos</span><h2>Nuestra esencia</h2></div>
+    <div class="sec-head reveal" data-num="08"><span class="mono">// Quiénes somos</span><h2>Nuestra esencia</h2></div>
     <div class="mv-grid">
       <div class="lema reveal grad-text">“La superación es nuestro trabajo diario.”</div>
       <div class="mv reveal"><span class="mono">Misión</span><h3>A dónde apuntamos</h3><p>Consolidarnos como una empresa de mayoreo líder en el sector ferretero, eléctrico, refaccionario, tornillero, agrícola, pinturas y complementos; satisfaciendo las necesidades de nuestros clientes mediante productos de óptima calidad, respaldados por un servicio eficiente, confiable y profesional.</p></div>
@@ -844,8 +843,8 @@
   <div class="wrap">
     <div class="cotiza-grid">
       <div class="reveal">
-        <span class="mono">// Hablemos</span>
-        <h2 style="font-size:clamp(2rem,4vw,3rem);margin:14px 0">Solicita tu cotización</h2>
+        <span class="mono mono-badge">// Hablemos</span>
+        <h2 style="font-size:clamp(2rem,4vw,3rem);margin:20px 0 14px">Solicita tu cotización</h2>
         <p style="color:var(--muted)">Cuéntanos qué necesitas y te respondemos por WhatsApp. Sin costo ni compromiso.</p>
         <ul class="contact-list">
           <li><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg></div><div><b>WhatsApp Ventas</b><span>618 134 1297</span></div></li>
@@ -869,7 +868,7 @@
 
 <section style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head reveal" data-num="08"><span class="mono">// Dudas frecuentes</span><h2>Preguntas rápidas</h2></div>
+    <div class="sec-head reveal" data-num="09"><span class="mono">// Dudas frecuentes</span><h2>Preguntas rápidas</h2></div>
     <div class="faq reveal">
       <div class="faq-item"><button class="faq-q" aria-expanded="false">¿Venden solo a mayoreo o también al público?<span class="x">+</span></button><div class="faq-a"><div><div class="resp">Somos una distribuidora de mayoreo (B2B) con condiciones especiales para constructoras, industria, talleres y comercio, pero también atendemos al público en general en nuestra sucursal de Masurio 200.</div></div></div></div>
       <div class="faq-item"><button class="faq-q" aria-expanded="false">¿Cómo pido una cotización?<span class="x">+</span></button><div class="faq-a"><div><div class="resp">Tienes tres caminos: el formulario de esta página, el WhatsApp de Ventas (618 134 1297) o el Bot Águila (618 818 2655), que responde 24/7. En todos los casos un asesor confirma existencias y precios.</div></div></div></div>
@@ -883,7 +882,7 @@
 
 <section id="ubicacion" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head reveal" data-num="09"><span class="mono">// Visítanos</span><h2>Dónde estamos</h2></div>
+    <div class="sec-head reveal" data-num="10"><span class="mono">// Visítanos</span><h2>Dónde estamos</h2></div>
     <div class="ubica-grid">
       <iframe class="map-frame reveal" src="https://www.google.com/maps?q=24.0325236,-104.6245231&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de Tornillos Águila en Durango" allowfullscreen></iframe>
       <div class="horario reveal">
