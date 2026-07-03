@@ -12,6 +12,25 @@ Esta es una **vista previa (v2)** para validación del cliente. Sitio estático,
 
 - Botón **Plataforma Águila** del menú: ahora usa el **rostro recortado de la mascota** con fondo transparente (`assets/img/bot-rostro.webp`, óvalo con borde suave y cuello degradado) en lugar del PNG con fondo.
 
+## v4.1 — Lluvia ascendente de tornillería en el hero
+
+- Capa de partículas en canvas sobre el hero: **tuercas hexagonales, tornillos con cuerda, rondanas y pernos** ascienden con vaivén, giro lento y halo de brasa ámbar (mix-blend screen sobre el video).
+- Optimización al máximo: sprites **pre-horneados una sola vez** con su glow (cero shadowBlur por frame), un solo requestAnimationFrame, DPR limitado a 2, densidad adaptativa (14–26 piezas según viewport), fade de vida por altura, **pausa automática** cuando el hero sale de pantalla o la pestaña se oculta, y desactivado con prefers-reduced-motion.
+
+## Rediseño v4.0 — "Instrumento industrial de precisión"
+
+Rediseño total conservando la esencia (paleta ámbar/tinta, Syne·Manrope·JetBrains Mono, Guía Águila, todo el contenido) bajo las doctrinas design-taste + Emil Kowalski:
+
+- **Firma: carril de calibración** fijo al borde izquierdo con regla de ticks, marcador que se desplaza y **índice de sección vivo (01–08)** con micro-flip al cambiar. Los **numerales fantasma outline** de cada cabecera coinciden con ese índice: estructura que codifica posición real, no decoración.
+- **Hero**: visor con brackets técnicos alrededor del logo (se expanden al hover), parallax de mouse 3D sutil en el logo, tercera línea del titular en trazo outline.
+- **Botones v2**: flecha que desliza con easing spring al hover, estado pressed scale(.97), sheen conservado.
+- **Nav**: píldora indicadora que se desliza entre enlaces con rebote sutil.
+- **FAQ fluida**: acordeón reconstruido (button + grid-template-rows) con apertura animada de 360ms y aria-expanded — antes el `<details>` abría a saltos.
+- **Proceso**: línea conectora que se llena (1.4s) con nodos que se encienden al entrar en pantalla.
+- **Preloader v2**: contador porcentual tabular + salida wipe hacia arriba.
+- **Footer editorial**: wordmark gigante GRUPO ÁGUILA en outline con parallax de entrada (GSAP scrub).
+- **Marquee** ligado a la velocidad del scroll (scrub GSAP).
+
 ## Novedades v3.7 — Nav compacto + muro de marcas completo
 
 - **Nav 40% más bajo**: logo 38px, botones neón compactos (7px de padding, texto en una línea, icono 16px) y glow contenido para que el menú acompañe sin competir.
