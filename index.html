@@ -206,24 +206,46 @@
   .pcard p{color:var(--muted);font-size:.95rem;margin-top:8px}
   .pcard .tag{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:2px;color:var(--dim);position:absolute;top:24px;right:26px}
 
-  /* ===== MURO DE LOGOS ===== */
-  .logo-wall{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-  .logo-chip{background:#fff;border:1px solid var(--panel-line);border-radius:16px;padding:18px 16px 13px;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;min-height:122px;
-    transition:transform .22s var(--e-out),box-shadow .25s var(--e-out),border-color .2s}
-  .logo-chip:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(0,0,0,.45);border-color:rgba(242,118,30,.5)}
-  .logo-chip img{max-height:44px;max-width:82%;width:auto;object-fit:contain;transition:transform .22s var(--e-out)}
-  .logo-chip:hover img{transform:scale(1.05)}
-  .logo-chip.alto img{max-height:62px}
-  .logo-chip .name{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:1.5px;text-transform:uppercase;color:#6B7079;text-align:center}
-  /* marcas con lienzo propio (fondo de color de la marca) */
-  .logo-chip.oscuro{background:#0B0B0C}
-  .logo-chip.oscuro .name{color:#8b9098}
-  .logo-chip.rojo{background:#B60718}
-  .logo-chip.rojo .name{color:rgba(255,255,255,.85)}
+  /* ===== MURO DE LOGOS (chips oscuros + placa cálida + escaneo) ===== */
+  .logo-wall{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .logo-wall::after{/* reflector que sigue al cursor sobre todo el muro */
+    content:"";position:absolute;inset:-2px;border-radius:18px;pointer-events:none;z-index:2;opacity:0;transition:opacity .35s;
+    background:radial-gradient(260px 200px at var(--mx,50%) var(--my,50%),rgba(255,138,43,.09),transparent 70%)}
+  .logo-wall.foco::after{opacity:1}
+  .logo-chip{position:relative;background:linear-gradient(168deg,rgba(244,239,231,.055),rgba(244,239,231,.015));
+    border:1px solid var(--panel-line);border-radius:16px;padding:9px 9px 11px;overflow:hidden;
+    display:flex;flex-direction:column;align-items:center;gap:10px;min-height:128px;
+    transition:transform .2s var(--e-out),box-shadow .22s var(--e-out),border-color .2s,background .25s}
+  .logo-chip .placa{position:relative;width:100%;flex:1;min-height:74px;display:flex;align-items:center;justify-content:center;
+    border-radius:11px;overflow:hidden;background:linear-gradient(160deg,#F5EFE4,#E7DDCB);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -10px 22px rgba(184,142,84,.14);transition:box-shadow .25s}
+  .logo-chip .placa::before{/* barrido de escaneo periódico (idioma visual del taller/mascota) */
+    content:"";position:absolute;top:-25%;bottom:-25%;left:-48%;width:36%;pointer-events:none;opacity:0;
+    transform:skewX(-18deg) translateX(0);will-change:transform,opacity;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),rgba(255,176,96,.4),transparent);
+    animation:chip-sweep 9s linear infinite;animation-delay:calc(var(--i,0)*.32s)}
+  @keyframes chip-sweep{0%,76%{opacity:0;transform:skewX(-18deg) translateX(0)}80%{opacity:1}93%{opacity:1;transform:skewX(-18deg) translateX(560%)}100%{opacity:0;transform:skewX(-18deg) translateX(560%)}}
+  .logo-chip img{max-height:44px;max-width:80%;width:auto;object-fit:contain;position:relative;z-index:1;
+    filter:saturate(.85);transition:transform .2s var(--e-out),filter .2s}
+  .logo-chip.alto img{max-height:60px}
+  .logo-chip .name{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);text-align:center;transition:color .2s}
+  @media(hover:hover) and (pointer:fine){
+    .logo-chip:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.5);border-color:rgba(242,118,30,.55)}
+    .logo-chip:hover .placa{box-shadow:inset 0 1px 0 rgba(255,255,255,.65),inset 0 -12px 26px rgba(242,118,30,.22)}
+    .logo-chip:hover img{transform:scale(1.06);filter:saturate(1.08)}
+    .logo-chip:hover .name{color:var(--amber)}
+  }
+  /* marcas con lienzo propio (color de la marca en la placa) */
+  .logo-chip.oscuro .placa{background:linear-gradient(160deg,#151517,#0A0A0B);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),inset 0 -10px 22px rgba(0,0,0,.5)}
+  .logo-chip.rojo .placa{background:linear-gradient(160deg,#C10A1C,#8E0513);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -10px 22px rgba(60,0,6,.45)}
+  /* entrada escalonada en oleada diagonal (CSS puro, no depende de GSAP) */
+  .logo-wall.reveal{transform:none}
+  .logo-wall.reveal .logo-chip{opacity:0;transform:translateY(24px) scale(.97)}
+  .logo-wall.reveal.in .logo-chip{animation:chip-in .6s var(--e-out) forwards;animation-delay:calc(var(--i,0)*70ms)}
+  @keyframes chip-in{to{opacity:1;transform:none}}
   /* logos dentro de las tarjetas ancla */
     .ancla .cab{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
-  .ancla .logo-mini{background:#fff;border-radius:10px;height:42px;padding:9px 14px;display:inline-flex;align-items:center}
+  .ancla .logo-mini{background:linear-gradient(160deg,#F5EFE4,#E7DDCB);border-radius:10px;height:42px;padding:9px 14px;display:inline-flex;align-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
   .ancla .logo-mini img{max-height:100%;max-width:110px;object-fit:contain}
   .marca-anclas{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px}
   .ancla{background:var(--grad-soft);border:1px solid rgba(242,118,30,.28);border-radius:20px;padding:26px;transition:transform .28s var(--e-out),border-color .25s}
@@ -258,8 +280,16 @@
 
   /* ===== CENTRO DE SERVICIO (monitor de taller) ===== */
   .serv-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+  /* eyebrow protagonista: insignia grande con pulso */
+  #servicio .sec-head .mono{display:inline-flex;align-items:center;gap:12px;font-size:.98rem;letter-spacing:5px;
+    padding:12px 22px;border:1px solid rgba(242,118,30,.45);border-radius:44px;background:rgba(242,118,30,.08);
+    box-shadow:inset 0 0 26px rgba(242,118,30,.12),0 0 22px rgba(242,118,30,.1)}
+  #servicio .sec-head .mono::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--amber);
+    box-shadow:0 0 10px rgba(255,138,43,.9);animation:auth-pulso 2.2s ease-in-out infinite}
+  @keyframes auth-pulso{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.78)}}
+  #servicio .sec-head h2{font-size:clamp(2.6rem,5.4vw,4.2rem);margin-top:20px}
   .serv-badges{display:flex;gap:10px;align-items:center;margin-bottom:8px}
-  .serv-badges .b{background:#fff;border-radius:12px;padding:9px 14px;display:flex;align-items:center;height:44px}
+  .serv-badges .b{background:linear-gradient(160deg,#F5EFE4,#E7DDCB);border-radius:12px;padding:9px 14px;display:flex;align-items:center;height:44px;box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
   .serv-badges .b img{height:22px;width:auto}
   .serv-badges .tag-auth{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--amber);border:1px solid rgba(242,118,30,.4);border-radius:40px;padding:8px 14px;background:rgba(242,118,30,.07)}
   .taller{display:grid;grid-template-columns:264px 1fr;border:1px solid var(--panel-line);border-radius:26px;overflow:hidden;background:var(--panel);backdrop-filter:blur(10px);margin-top:44px}
@@ -545,6 +575,8 @@
     .hero-cta .btn{justify-content:center}
     .bento,.why-grid,.pasos,.marca-anclas{grid-template-columns:1fr}
     .logo-wall{grid-template-columns:repeat(2,1fr)}
+    #servicio .sec-head .mono{font-size:.76rem;letter-spacing:3px;padding:10px 16px;gap:9px}
+    #servicio .sec-head h2{font-size:clamp(2rem,8vw,2.6rem);margin-top:16px}
     .stats{grid-template-columns:repeat(2,1fr);gap:12px}
     .stat{padding:22px 18px}.stat .n{font-size:2.4rem}
     .marquee .track{gap:34px}.marquee span{font-size:.92rem;gap:34px}
@@ -674,22 +706,22 @@
       <div class="ancla reveal"><div class="cab"><span class="logo-mini"><img src="./assets/img/marcas/fischer.webp" alt="" loading="lazy"></span><span class="mono">Ancla 03</span></div><h3>Fischer</h3><p>Soluciones de fijación en acero, química y nylon.</p></div>
       <div class="ancla reveal"><div class="cab"><span class="logo-mini"><img src="./assets/img/marcas/birlos.webp" alt="" loading="lazy"></span><span class="mono">Ancla 04</span></div><h3>Birlos Internacionales</h3><p>Especialistas en birlos y espárragos para el sector automotriz.</p></div>
     </div>
-    <div class="logo-wall">
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/truper.svg" alt="Truper" loading="lazy"><span class="name">Truper</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/evans.webp" alt="Evans" loading="lazy"><span class="name">Evans</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/fischer.webp" alt="Fischer" loading="lazy"><span class="name">Fischer</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/coflex.webp" alt="Coflex" loading="lazy"><span class="name">Coflex</span></div>
-      <div class="logo-chip alto reveal"><img src="./assets/img/marcas/ecom.webp" alt="ECOM Químicos Automotrices" loading="lazy"><span class="name">ECOM</span></div>
-      <div class="logo-chip alto reveal"><img src="./assets/img/marcas/birlos.webp" alt="Birlos Internacionales" loading="lazy"><span class="name">Birlos Intl.</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/ideal.webp" alt="Ideal Tridon Group" loading="lazy"><span class="name">Ideal Tridon</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/ipesa.webp" alt="IPESA" loading="lazy"><span class="name">IPESA</span></div>
-      <div class="logo-chip alto reveal"><img src="./assets/img/marcas/pennsylvania.webp" alt="Productos Pennsylvania" loading="lazy"><span class="name">Pennsylvania</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/suplast.webp" alt="Suplast" loading="lazy"><span class="name">Suplast</span></div>
-      <div class="logo-chip rojo reveal"><img src="./assets/img/marcas/victorinox.webp" alt="Victorinox" loading="lazy"><span class="name">Victorinox</span></div>
-      <div class="logo-chip oscuro reveal"><img src="./assets/img/marcas/brotimex.webp" alt="Brotimex" loading="lazy"><span class="name">Brotimex</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/arlite.webp" alt="Arlite Iluminación LED" loading="lazy"><span class="name">Arlite</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/winled.webp" alt="Winled" loading="lazy"><span class="name">Winled</span></div>
-      <div class="logo-chip reveal"><img src="./assets/img/marcas/killmax.webp" alt="Killmax" loading="lazy"><span class="name">Killmax</span></div>
+    <div class="logo-wall reveal">
+      <div class="logo-chip" style="--i:0"><span class="placa"><img src="./assets/img/marcas/truper.svg" alt="Truper" loading="lazy"></span><span class="name">Truper</span></div>
+      <div class="logo-chip" style="--i:1"><span class="placa"><img src="./assets/img/marcas/evans.webp" alt="Evans" loading="lazy"></span><span class="name">Evans</span></div>
+      <div class="logo-chip" style="--i:2"><span class="placa"><img src="./assets/img/marcas/fischer.webp" alt="Fischer" loading="lazy"></span><span class="name">Fischer</span></div>
+      <div class="logo-chip" style="--i:3"><span class="placa"><img src="./assets/img/marcas/coflex.webp" alt="Coflex" loading="lazy"></span><span class="name">Coflex</span></div>
+      <div class="logo-chip alto" style="--i:4"><span class="placa"><img src="./assets/img/marcas/ecom.webp" alt="ECOM Químicos Automotrices" loading="lazy"></span><span class="name">ECOM</span></div>
+      <div class="logo-chip alto" style="--i:1"><span class="placa"><img src="./assets/img/marcas/birlos.webp" alt="Birlos Internacionales" loading="lazy"></span><span class="name">Birlos Intl.</span></div>
+      <div class="logo-chip" style="--i:2"><span class="placa"><img src="./assets/img/marcas/ideal.webp" alt="Ideal Tridon Group" loading="lazy"></span><span class="name">Ideal Tridon</span></div>
+      <div class="logo-chip" style="--i:3"><span class="placa"><img src="./assets/img/marcas/ipesa.webp" alt="IPESA" loading="lazy"></span><span class="name">IPESA</span></div>
+      <div class="logo-chip alto" style="--i:4"><span class="placa"><img src="./assets/img/marcas/pennsylvania.webp" alt="Productos Pennsylvania" loading="lazy"></span><span class="name">Pennsylvania</span></div>
+      <div class="logo-chip" style="--i:5"><span class="placa"><img src="./assets/img/marcas/suplast.webp" alt="Suplast" loading="lazy"></span><span class="name">Suplast</span></div>
+      <div class="logo-chip rojo" style="--i:2"><span class="placa"><img src="./assets/img/marcas/victorinox.webp" alt="Victorinox" loading="lazy"></span><span class="name">Victorinox</span></div>
+      <div class="logo-chip oscuro" style="--i:3"><span class="placa"><img src="./assets/img/marcas/brotimex.webp" alt="Brotimex" loading="lazy"></span><span class="name">Brotimex</span></div>
+      <div class="logo-chip" style="--i:4"><span class="placa"><img src="./assets/img/marcas/arlite.webp" alt="Arlite Iluminación LED" loading="lazy"></span><span class="name">Arlite</span></div>
+      <div class="logo-chip" style="--i:5"><span class="placa"><img src="./assets/img/marcas/winled.webp" alt="Winled" loading="lazy"></span><span class="name">Winled</span></div>
+      <div class="logo-chip" style="--i:6"><span class="placa"><img src="./assets/img/marcas/killmax.webp" alt="Killmax" loading="lazy"></span><span class="name">Killmax</span></div>
     </div>
   </div>
 </section>
@@ -994,6 +1026,24 @@ var io = new IntersectionObserver(function(es){
   });
 },{threshold:.16});
 document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+/* ===== Muro de logos: reflector que sigue al cursor ===== */
+(function(){
+  var muro = document.querySelector('.logo-wall');
+  if(!muro || reduceMotion || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  var raf = null;
+  muro.addEventListener('pointermove', function(e){
+    if(raf) return;
+    raf = requestAnimationFrame(function(){
+      var r = muro.getBoundingClientRect();
+      muro.style.setProperty('--mx', ((e.clientX - r.left)/r.width*100).toFixed(2)+'%');
+      muro.style.setProperty('--my', ((e.clientY - r.top)/r.height*100).toFixed(2)+'%');
+      raf = null;
+    });
+  });
+  muro.addEventListener('pointerenter', function(){ muro.classList.add('foco'); });
+  muro.addEventListener('pointerleave', function(){ muro.classList.remove('foco'); });
+})();
 
 function cuenta(el, to, pre, suf, dur){
   if(reduceMotion){ el.textContent = pre + to + suf; return; }
