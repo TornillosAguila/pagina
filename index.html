@@ -188,9 +188,10 @@
   .logo-chip.rojo{background:#B60718}
   .logo-chip.rojo .name{color:rgba(255,255,255,.85)}
   /* logos dentro de las tarjetas ancla */
-  .ancla .logo-mini{background:#fff;border-radius:10px;height:42px;padding:9px 14px;display:inline-flex;align-items:center;margin-bottom:14px}
+    .ancla .cab{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+  .ancla .logo-mini{background:#fff;border-radius:10px;height:42px;padding:9px 14px;display:inline-flex;align-items:center}
   .ancla .logo-mini img{max-height:100%;max-width:110px;object-fit:contain}
-  .marca-anclas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:26px}
+  .marca-anclas{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px}
   .ancla{background:var(--grad-soft);border:1px solid rgba(242,118,30,.28);border-radius:20px;padding:26px;transition:transform .28s var(--e-out),border-color .25s}
   .ancla:hover{transform:translateY(-5px);border-color:rgba(242,118,30,.55)}
   .ancla h3{color:var(--amber);font-size:1.35rem}
@@ -258,6 +259,9 @@
   .panelserv.cambia .serv-vista>*:nth-child(4){animation-delay:.15s}
   .panelserv.cambia .marca-agua{transform:scale(1.06)}
   @keyframes serv-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .serv-correo{margin-top:18px;color:var(--muted);font-size:.92rem}
+  .serv-correo a{color:var(--amber);font-weight:600;border-bottom:1px solid rgba(242,118,30,.35);transition:border-color .2s,color .2s}
+  .serv-correo a:hover{color:var(--amber-2);border-color:var(--amber-2)}
   .serv-auto{position:absolute;left:0;bottom:0;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--grad);opacity:.55}
   .panelserv.auto .serv-auto{animation:serv-t var(--serv-dur,5.5s) linear forwards}
   @keyframes serv-t{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -468,7 +472,7 @@
     .bento{grid-template-columns:1fr 1fr}.pcard,.pcard.big{grid-column:auto}
     .why-grid,.pasos{grid-template-columns:1fr 1fr}
     .paso:not(:last-child)::after{display:none}
-    .marca-anclas{grid-template-columns:1fr}
+    .marca-anclas{grid-template-columns:repeat(2,1fr)}
     .logo-wall{grid-template-columns:repeat(3,1fr)}
     .eco-grid,.mv-grid,.cotiza-grid,.ubica-grid{grid-template-columns:1fr}
     .taller{grid-template-columns:1fr}
@@ -494,7 +498,7 @@
     .hero p.lead{font-size:1rem}
     .hero-cta{flex-direction:column;align-items:stretch}
     .hero-cta .btn{justify-content:center}
-    .bento,.why-grid,.pasos{grid-template-columns:1fr}
+    .bento,.why-grid,.pasos,.marca-anclas{grid-template-columns:1fr}
     .logo-wall{grid-template-columns:repeat(2,1fr)}
     .stats{grid-template-columns:repeat(2,1fr);gap:12px}
     .stat{padding:22px 18px}.stat .n{font-size:2.4rem}
@@ -611,9 +615,10 @@
   <div class="wrap">
     <div class="sec-head reveal"><span class="mono">// Respaldo de marca</span><h2>Marcas y proveedores que manejamos</h2><p>Trabajamos con los líderes de cada categoría para garantizar calidad y disponibilidad.</p></div>
     <div class="marca-anclas">
-      <div class="ancla reveal"><span class="logo-mini"><img src="./assets/img/marcas/truper.svg" alt="" loading="lazy"></span><span class="mono">Ancla 01</span><h3>Truper</h3><p>Refacciones, accesorios y herramienta para todo trabajo.</p></div>
-      <div class="ancla reveal"><span class="logo-mini"><img src="./assets/img/marcas/evans.webp" alt="" loading="lazy"></span><span class="mono">Ancla 02</span><h3>Evans</h3><p>Soluciones en agua y energía: bombas y generadores para hogar, negocio e industria.</p></div>
-      <div class="ancla reveal"><span class="logo-mini"><img src="./assets/img/marcas/fischer.webp" alt="" loading="lazy"></span><span class="mono">Ancla 03</span><h3>Fischer</h3><p>Soluciones de fijación en acero, química y nylon.</p></div>
+      <div class="ancla reveal"><div class="cab"><span class="logo-mini"><img src="./assets/img/marcas/truper.svg" alt="" loading="lazy"></span><span class="mono">Ancla 01</span></div><h3>Truper</h3><p>Refacciones, accesorios y herramienta para todo trabajo.</p></div>
+      <div class="ancla reveal"><div class="cab"><span class="logo-mini"><img src="./assets/img/marcas/evans.webp" alt="" loading="lazy"></span><span class="mono">Ancla 02</span></div><h3>Evans</h3><p>Soluciones en agua y energía: bombas y generadores para hogar, negocio e industria.</p></div>
+      <div class="ancla reveal"><div class="cab"><span class="logo-mini"><img src="./assets/img/marcas/fischer.webp" alt="" loading="lazy"></span><span class="mono">Ancla 03</span></div><h3>Fischer</h3><p>Soluciones de fijación en acero, química y nylon.</p></div>
+      <div class="ancla reveal"><div class="cab"><span class="logo-mini"><img src="./assets/img/marcas/birlos.webp" alt="" loading="lazy"></span><span class="mono">Ancla 04</span></div><h3>Birlos Internacionales</h3><p>Especialistas en birlos y espárragos para el sector automotriz.</p></div>
     </div>
     <div class="logo-wall">
       <div class="logo-chip reveal"><img src="./assets/img/marcas/truper.svg" alt="Truper" loading="lazy"><span class="name">Truper</span></div>
@@ -670,6 +675,7 @@
         <div class="serv-auto" aria-hidden="true"></div>
       </div>
     </div>
+    <p class="serv-correo reveal">¿Dudas sobre tu equipo? Escríbenos a <a href="mailto:centrodeservicio@tornillosaguila.com">centrodeservicio@tornillosaguila.com</a></p>
   </div>
 </section>
 
@@ -813,7 +819,7 @@
       </div>
       </div>
       <div><h4>Navegación</h4><a href="#productos">Productos</a><a href="#marcas">Marcas</a><a href="#servicio">Centro de servicio</a><a href="#ecosistema">Ecosistema digital</a><a href="#nosotros">Nosotros</a><a href="#ubicacion">Ubicación</a><a href="#contacto">Contacto</a></div>
-      <div><h4>Contacto</h4><a href="https://wa.me/5216181341297" target="_blank" rel="noopener">📞 Ventas: 618 134 1297</a><a href="https://wa.me/526188182655" target="_blank" rel="noopener">🤖 Bot Águila: 618 818 2655</a><a href="mailto:ventas@tornillosaguila.com">ventas@tornillosaguila.com</a><a href="https://maps.app.goo.gl/pPtkLc2ZBgiNMjLW7" target="_blank" rel="noopener">Masurio 200, Durango</a><a href="http://aguiladgo.dyndns.org:1945/B2B/index.php" target="_blank" rel="noopener" style="color:var(--gold)">⚡ Plataforma Águila</a></div>
+      <div><h4>Contacto</h4><a href="https://wa.me/5216181341297" target="_blank" rel="noopener">📞 Ventas: 618 134 1297</a><a href="https://wa.me/526188182655" target="_blank" rel="noopener">🤖 Bot Águila: 618 818 2655</a><a href="mailto:ventas@tornillosaguila.com">ventas@tornillosaguila.com</a><a href="mailto:centrodeservicio@tornillosaguila.com">centrodeservicio@tornillosaguila.com</a><a href="https://maps.app.goo.gl/pPtkLc2ZBgiNMjLW7" target="_blank" rel="noopener">Masurio 200, Durango</a><a href="http://aguiladgo.dyndns.org:1945/B2B/index.php" target="_blank" rel="noopener" style="color:var(--gold)">⚡ Plataforma Águila</a></div>
     </div>
     <div class="foot-bottom"><span>© 2026 Tornillos Águila, S.A. de C.V. — Todos los derechos reservados.</span><span>Aviso de Privacidad · Términos</span></div>
   </div>
