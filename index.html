@@ -134,7 +134,7 @@
   .hero::before{content:"";position:absolute;inset:0;z-index:2;
     background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:54px 54px;
     mask-image:radial-gradient(circle at 50% 40%,#000,transparent 75%)}
-  .hero .wrap{position:relative;z-index:5;display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center;padding:130px 28px 70px;width:100%}
+  .hero .wrap{position:relative;z-index:5;display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center;padding:92px 28px 50px;width:100%}
   .visor{position:relative}
   .visor::before,.visor::after,.visor .esq::before,.visor .esq::after{content:"";position:absolute;width:22px;height:22px;border:1.5px solid rgba(242,118,30,.55);transition:transform .4s var(--e-out)}
   .visor::before{top:-14px;left:-14px;border-right:0;border-bottom:0}
@@ -148,16 +148,16 @@
   .hero-logo{width:100%;max-width:440px;aspect-ratio:148/180;background:var(--logo) center/contain no-repeat;justify-self:center;
     filter:drop-shadow(0 30px 60px rgba(232,67,28,.45));animation:float 6s ease-in-out infinite}
   @keyframes float{50%{transform:translateY(-16px)}}
-  .hero .chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px;opacity:0;animation:fade .9s .15s forwards}
+  .hero .chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px;opacity:0;animation:fade .9s .15s forwards}
   .hero .chips span{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--amber);
     border:1px solid rgba(242,118,30,.35);background:rgba(242,118,30,.08);border-radius:40px;padding:7px 14px;backdrop-filter:blur(6px)}
-  .hero h1{font-size:clamp(2.8rem,6.2vw,5.4rem);margin-bottom:18px}
+  .hero h1{font-size:clamp(2.8rem,6.2vw,5.4rem);margin-bottom:15px}
   .hero h1 .line{display:block;overflow:hidden}
   .hero h1 .line span{display:block;transform:translateY(110%);animation:rise .9s var(--e-out) forwards}
   .hero h1 .line:nth-child(2) span{animation-delay:.12s}
   .hero h1 .line:nth-child(3) span{animation-delay:.24s}
   @keyframes rise{to{transform:none}}
-  .hero p.lead{font-size:1.15rem;color:var(--muted);max-width:520px;margin-bottom:30px;opacity:0;animation:fade 1s .5s forwards}
+  .hero p.lead{font-size:1.15rem;color:var(--muted);max-width:520px;margin-bottom:26px;opacity:0;animation:fade 1s .5s forwards}
   @keyframes fade{to{opacity:1}}
   .hero-cta{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fade 1s .7s forwards}
   .scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:5;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:3px;color:var(--dim);text-align:center}
@@ -189,6 +189,29 @@
     box-shadow:0 0 10px rgba(255,138,43,.9);animation:auth-pulso 2.2s ease-in-out infinite}
   @keyframes auth-pulso{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.78)}}
   .outline{color:transparent;-webkit-text-stroke:1.5px var(--paper)}
+
+  /* ============ CASCADA LATERAL (palabras outline cayendo) ============ */
+  .cascada{position:absolute;top:0;left:0;bottom:0;width:170px;z-index:3;pointer-events:none;overflow:hidden;
+    -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 12%,#000 86%,transparent 100%);
+            mask-image:linear-gradient(180deg,transparent 0,#000 12%,#000 86%,transparent 100%)}
+  .cascada span{position:absolute;top:0;left:var(--x,24px);
+    writing-mode:vertical-rl;white-space:nowrap;
+    font-family:'Syne',sans-serif;font-weight:800;letter-spacing:3px;text-transform:uppercase;
+    font-size:var(--fs,1.7rem);line-height:1;
+    color:transparent;-webkit-text-stroke:1.2px rgba(240,236,228,.30);
+    transform:translateY(-40vh) rotate(180deg);opacity:0;
+    animation:cascada-caer var(--d,15s) linear infinite;animation-delay:var(--del,0s);
+    will-change:transform,opacity,filter}
+  .cascada span:nth-child(3n){-webkit-text-stroke-color:rgba(242,118,30,.38)}
+  .cascada span:nth-child(4n+1){-webkit-text-stroke-width:1px}
+  @keyframes cascada-caer{
+    0%{transform:translateY(-42vh) rotate(180deg);opacity:0;filter:blur(9px)}
+    14%{opacity:.6;filter:blur(2.5px)}
+    50%{opacity:.45;filter:blur(1.2px)}
+    82%{opacity:.5;filter:blur(3px)}
+    100%{transform:translateY(112vh) rotate(180deg);opacity:0;filter:blur(9px)}
+  }
+  @media(max-width:1240px){.cascada{display:none}}
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s var(--e-out),transform .6s var(--e-out)}
   .reveal.in{opacity:1;transform:none}
 
@@ -538,7 +561,7 @@
     .menu a.nav-link{padding:15px 22px;font-size:1.02rem;border-bottom:1px solid rgba(255,255,255,.05)}
     .menu a.nav-link::after{display:none}
     .menu .nav-btn{margin:10px 22px 2px;justify-content:center;padding:14px;border-radius:12px;font-size:.92rem}
-    .hero .wrap{grid-template-columns:1fr;text-align:center;padding:112px 24px 56px;gap:22px}
+    .hero .wrap{grid-template-columns:1fr;text-align:center;padding:96px 24px 48px;gap:20px}
     .hero-logo{order:-1;max-width:300px}
     .hero .chips{justify-content:center}
     .hero p.lead{margin-inline:auto}.hero-cta{justify-content:center}
@@ -566,7 +589,7 @@
     .wrap{padding:0 18px}
     section{padding:60px 0}
     .sec-head{margin-bottom:36px}
-    .hero .wrap{padding:100px 18px 48px}
+    .hero .wrap{padding:88px 18px 42px}
     .hero-logo{max-width:240px}
     .hero h1{font-size:clamp(2.05rem,8.5vw,3rem)}
     .hero p.lead{font-size:1rem}
@@ -601,6 +624,7 @@
   @media(prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
     .reveal{opacity:1!important;transform:none!important}
+    .cascada{display:none}
   }
 </style>
 </head>
@@ -626,7 +650,7 @@
     <button class="hamb" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
     <div class="menu" id="menu">
       <span class="nav-pill" id="nav-pill"></span>
-      <a class="nav-link" href="#productos">Productos</a><a class="nav-link" href="#marcas">Marcas</a><a class="nav-link" href="#servicio">Servicio</a><a class="nav-link" href="#ecosistema">Digital</a><a class="nav-link" href="#nosotros">Nosotros</a><a class="nav-link" href="#ubicacion">Ubicación</a>
+      <a class="nav-link" href="#productos">Productos</a><a class="nav-link" href="#marcas">Marcas</a><a class="nav-link" href="#servicio">Centro de servicio</a><a class="nav-link" href="#ecosistema">Digital</a><a class="nav-link" href="#nosotros">Nosotros</a><a class="nav-link" href="#ubicacion">Ubicación</a>
       <a href="http://aguiladgo.dyndns.org:1945/B2B/index.php" target="_blank" rel="noopener" class="btn btn-neon nav-btn"><img class="ico" src="./assets/img/mascota-cara.webp" alt="" width="192" height="192"> Plataforma Águila</a>
       <a href="https://wa.me/5216181341297?text=Hola%20Grupo%20%C3%81guila%2C%20quiero%20contactar%20a%20Ventas." target="_blank" rel="noopener" class="btn btn-neon nav-btn"><span class="emo">💬</span> Chat Ventas</a>
       <a href="https://wa.me/526188182655?text=Hola%2C%20quiero%20usar%20el%20Bot%20%C3%81guila." target="_blank" rel="noopener" class="btn btn-neon nav-btn"><span class="emo">🤖</span> Bot Águila</a>
@@ -638,6 +662,18 @@
   <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="./assets/img/hero-poster.jpg"><source src="./assets/video/grupo-aguila-hero.webm" type="video/webm"><source src="./assets/video/grupo-aguila-hero.mp4" type="video/mp4"></video>
   <div class="hero-veil"></div>
   <canvas class="hero-particulas" id="hero-particulas" aria-hidden="true"></canvas>
+  <div class="cascada" aria-hidden="true">
+    <span style="--x:16px; --fs:1.8rem; --d:16s; --del:-2s">Pintura</span>
+    <span style="--x:64px; --fs:1.45rem;--d:19s; --del:-9s">Tornillería</span>
+    <span style="--x:112px;--fs:1.7rem; --d:14s; --del:-5s">Truper</span>
+    <span style="--x:22px; --fs:1.5rem; --d:21s; --del:-14s">Evans</span>
+    <span style="--x:70px; --fs:1.9rem; --d:17s; --del:-1s">Selladores</span>
+    <span style="--x:118px;--fs:1.4rem; --d:20s; --del:-12s">Solventes</span>
+    <span style="--x:18px; --fs:1.65rem;--d:15s; --del:-8s">Fijación</span>
+    <span style="--x:66px; --fs:1.5rem; --d:22s; --del:-17s">Birlos</span>
+    <span style="--x:114px;--fs:1.75rem;--d:18s; --del:-4s">Iluminación</span>
+    <span style="--x:40px; --fs:1.55rem;--d:16.5s;--del:-11s">Victorinox</span>
+  </div>
   <div class="wrap">
     <div class="hero-copy">
       <span class="mono">Distribuidora de mayoreo · Durango, Dgo.</span>
@@ -773,20 +809,24 @@
         <h3>Plataforma Águila <span class="grad-text">B2B</span></h3>
         <p>El portal de pedidos en línea para clientes de mayoreo. Consulta el catálogo, arma tu pedido y da seguimiento sin filas ni llamadas.</p>
         <ul class="eco-lista">
-          <li>Catálogo con existencias de las 7 líneas</li>
-          <li>Pedidos y repedidos en minutos</li>
-          <li>Pensada para constructoras, talleres, comercio e industria</li>
+          <li>Pedidos y precios 24/7</li>
+          <li>Estado de cuenta en tiempo real</li>
+          <li>Órdenes de compra y cotizaciones</li>
+          <li>Facturas y remisiones</li>
+          <li>Catálogos actualizados</li>
         </ul>
         <a href="http://aguiladgo.dyndns.org:1945/B2B/index.php" target="_blank" rel="noopener" class="btn btn-neon">⚡ Entrar a la plataforma</a>
       </div>
       <div class="eco-card eco-bot reveal">
         <span class="eco-num">CANAL / 02</span>
         <h3>Bot Águila <span style="color:var(--wa)">24/7</span></h3>
-        <p>Nuestro asistente en WhatsApp. Escríbele al <b style="color:#fff">618 818 2655</b> y pregúntale por productos, precios y disponibilidad a cualquier hora.</p>
+        <p>«Soy tu asistente digital vía WhatsApp. Escríbeme al <b style="color:#fff">618 818 2655</b> a cualquier hora. Si ya eres cliente, yo te proporciono tus precios asignados.»</p>
         <ul class="eco-lista">
-          <li>Respuesta inmediata, todos los días</li>
-          <li>Cotizaciones y consultas de catálogo</li>
-          <li>Te canaliza con un asesor humano si lo necesitas</li>
+          <li>Consulta precios y existencias al instante</li>
+          <li>Catálogos al momento</li>
+          <li>Pedidos express</li>
+          <li>Revisa tus saldos</li>
+          <li>Atención personalizada con Ventas, Compras y Cuentas por Cobrar</li>
         </ul>
         <a href="https://wa.me/526188182655?text=Hola%2C%20quiero%20usar%20el%20Bot%20%C3%81guila." target="_blank" rel="noopener" class="btn btn-wa">🤖 Chatear con el Bot</a>
         <img class="eco-mascota" src="./assets/img/mascota-bot.webp" alt="" width="303" height="360" loading="lazy">
