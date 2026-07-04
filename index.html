@@ -145,9 +145,37 @@
   .visor:hover::after{transform:translate(4px,-4px)}
   .visor:hover .esq::before{transform:translate(-4px,4px)}
   .visor:hover .esq::after{transform:translate(4px,4px)}
-  .hero-logo{width:100%;max-width:440px;aspect-ratio:148/180;background:var(--logo) center/contain no-repeat;justify-self:center;
+  .hero-logo{width:100%;max-width:440px;aspect-ratio:148/180;position:relative;justify-self:center;
     filter:drop-shadow(0 30px 60px rgba(232,67,28,.45));animation:float 6s ease-in-out infinite}
   @keyframes float{50%{transform:translateY(-16px)}}
+
+  /* ============ ALETEO DEL ÁGUILA (capas cuerpo + alas) ============ */
+  .hero-logo .vuelo{position:absolute;inset:0}
+  .hero-logo .parte{position:absolute;inset:0;background:center/contain no-repeat;will-change:transform}
+  .hero-logo .ala-izq{background-image:url('./assets/img/aguila-ala-izq.webp');transform-origin:49.7% 35.2%}
+  .hero-logo .ala-der{background-image:url('./assets/img/aguila-ala-der.webp');transform-origin:65.5% 33.6%}
+  .hero-logo .cuerpo{background-image:url('./assets/img/aguila-cuerpo.webp')}
+  .hero-logo.aletea .ala-izq{animation:aleteo-i 1.9s cubic-bezier(.45,0,.55,1) both}
+  .hero-logo.aletea .ala-der{animation:aleteo-d 1.9s cubic-bezier(.45,0,.55,1) both}
+  .hero-logo.aletea .vuelo{animation:aleteo-cuerpo 1.9s cubic-bezier(.45,0,.55,1) both}
+  @keyframes aleteo-i{
+    0%{transform:rotate(0)} 10%{transform:rotate(-7deg)}
+    26%{transform:rotate(13deg)} 42%{transform:rotate(-6deg)}
+    58%{transform:rotate(11deg)} 72%{transform:rotate(-4deg)}
+    84%{transform:rotate(7deg)} 93%{transform:rotate(-1.5deg)} 100%{transform:rotate(0)}
+  }
+  @keyframes aleteo-d{
+    0%{transform:rotate(0)} 10%{transform:rotate(7deg)}
+    26%{transform:rotate(-13deg)} 42%{transform:rotate(6deg)}
+    58%{transform:rotate(-11deg)} 72%{transform:rotate(4deg)}
+    84%{transform:rotate(-7deg)} 93%{transform:rotate(1.5deg)} 100%{transform:rotate(0)}
+  }
+  @keyframes aleteo-cuerpo{
+    0%{transform:translateY(0)} 10%{transform:translateY(3px)}
+    26%{transform:translateY(-9px)} 42%{transform:translateY(0)}
+    58%{transform:translateY(-7px)} 72%{transform:translateY(1px)}
+    84%{transform:translateY(-3px)} 100%{transform:translateY(0)}
+  }
   .hero .chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px;opacity:0;animation:fade .9s .15s forwards}
   .hero .chips span{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--amber);
     border:1px solid rgba(242,118,30,.35);background:rgba(242,118,30,.08);border-radius:40px;padding:7px 14px;backdrop-filter:blur(6px)}
@@ -689,7 +717,7 @@
         <a href="#productos" class="btn btn-ghost magnet">Ver las 7 líneas</a>
       </div>
     </div>
-    <div class="visor"><span class="esq"></span><div class="hero-logo" role="img" aria-label="Logo Grupo Águila"></div></div>
+    <div class="visor"><span class="esq"></span><div class="hero-logo" role="img" aria-label="Logo Grupo Águila"><span class="vuelo" aria-hidden="true"><span class="parte ala-izq"></span><span class="parte ala-der"></span><span class="parte cuerpo"></span></span></div></div>
   </div>
   <div class="scroll-cue">SCROLL<div class="bar"></div></div>
 </header>
@@ -1314,6 +1342,32 @@ document.querySelectorAll('.faq-q').forEach(function(q){
 (function(){
   if(reduceMotion || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
   var hero = document.querySelector('.hero'), logo = document.querySelector('.hero-logo');
+  (function(){
+    if(!logo || reduceMotion) return;
+    var volando = false, enVista = true, tm = null;
+    function aletear(){
+      if(volando || !enVista || document.hidden) return;
+      volando = true;
+      logo.classList.add('aletea');
+      setTimeout(function(){ logo.classList.remove('aletea'); volando = false; }, 2000);
+      programar();
+    }
+    function programar(){
+      clearTimeout(tm);
+      tm = setTimeout(aletear, 8000);
+    }
+    setTimeout(aletear, 3000);
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(en){
+        enVista = en[0].isIntersecting;
+        if(enVista) programar();
+      }, {threshold:.25}).observe(logo);
+    }
+    document.addEventListener('visibilitychange', function(){ if(!document.hidden && enVista) programar(); });
+    if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+      logo.addEventListener('mouseenter', aletear);
+    }
+  })();
   if(!hero || !logo) return;
   hero.addEventListener('pointermove', function(e){
     var r = hero.getBoundingClientRect();
