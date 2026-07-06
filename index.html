@@ -155,28 +155,44 @@
   .hero-logo .ala-izq{background-image:url('./assets/img/aguila-ala-izq.webp');transform-origin:49.7% 35.2%}
   .hero-logo .ala-der{background-image:url('./assets/img/aguila-ala-der.webp');transform-origin:65.5% 33.6%}
   .hero-logo .cuerpo{background-image:url('./assets/img/aguila-cuerpo.webp')}
-  .hero-logo.aletea .ala-izq{animation:aleteo-i 1.9s cubic-bezier(.45,0,.55,1) both}
-  .hero-logo.aletea .ala-der{animation:aleteo-d 1.9s cubic-bezier(.45,0,.55,1) both}
-  .hero-logo.aletea .vuelo{animation:aleteo-cuerpo 1.9s cubic-bezier(.45,0,.55,1) both}
+  .hero-logo.aletea .ala-izq{animation:aleteo-i 2.2s linear both}
+  .hero-logo.aletea .ala-der{animation:aleteo-d 2.2s linear both;animation-delay:.055s}
+  .hero-logo.aletea .vuelo{animation:aleteo-cuerpo 2.2s cubic-bezier(.45,.05,.55,.95) both}
   @keyframes aleteo-i{
-    0%{transform:rotate(0)} 10%{transform:rotate(-7deg)}
-    26%{transform:rotate(13deg)} 42%{transform:rotate(-6deg)}
-    58%{transform:rotate(11deg)} 72%{transform:rotate(-4deg)}
-    84%{transform:rotate(7deg)} 93%{transform:rotate(-1.5deg)} 100%{transform:rotate(0)}
+    0%{transform:rotate(0);animation-timing-function:cubic-bezier(.4,0,.7,.4)}
+    9%{transform:rotate(-8deg);animation-timing-function:cubic-bezier(.2,.6,.35,1)}
+    20%{transform:rotate(14deg);animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+    37%{transform:rotate(-6.5deg);animation-timing-function:cubic-bezier(.25,.55,.4,1)}
+    47%{transform:rotate(11deg);animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+    63%{transform:rotate(-4.5deg);animation-timing-function:cubic-bezier(.3,.5,.45,1)}
+    72%{transform:rotate(7.5deg);animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+    86%{transform:rotate(-2deg);animation-timing-function:cubic-bezier(.4,0,.3,1)}
+    94%{transform:rotate(1.2deg);animation-timing-function:ease-out}
+    100%{transform:rotate(0)}
   }
   @keyframes aleteo-d{
-    0%{transform:rotate(0)} 10%{transform:rotate(7deg)}
-    26%{transform:rotate(-13deg)} 42%{transform:rotate(6deg)}
-    58%{transform:rotate(-11deg)} 72%{transform:rotate(4deg)}
-    84%{transform:rotate(-7deg)} 93%{transform:rotate(1.5deg)} 100%{transform:rotate(0)}
+    0%{transform:rotate(0);animation-timing-function:cubic-bezier(.4,0,.7,.4)}
+    9%{transform:rotate(8deg);animation-timing-function:cubic-bezier(.2,.6,.35,1)}
+    20%{transform:rotate(-14deg);animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+    37%{transform:rotate(6.5deg);animation-timing-function:cubic-bezier(.25,.55,.4,1)}
+    47%{transform:rotate(-11deg);animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+    63%{transform:rotate(4.5deg);animation-timing-function:cubic-bezier(.3,.5,.45,1)}
+    72%{transform:rotate(-7.5deg);animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+    86%{transform:rotate(2deg);animation-timing-function:cubic-bezier(.4,0,.3,1)}
+    94%{transform:rotate(-1.2deg);animation-timing-function:ease-out}
+    100%{transform:rotate(0)}
   }
   @keyframes aleteo-cuerpo{
-    0%{transform:translateY(0)} 10%{transform:translateY(3px)}
-    26%{transform:translateY(-9px)} 42%{transform:translateY(0)}
-    58%{transform:translateY(-7px)} 72%{transform:translateY(1px)}
-    84%{transform:translateY(-3px)} 100%{transform:translateY(0)}
-  }
-  .hero .chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px;opacity:0;animation:fade .9s .15s forwards}
+    0%{transform:translateY(0) rotate(0)}
+    9%{transform:translateY(3px) rotate(.4deg)}
+    22%{transform:translateY(-10px) rotate(-.5deg)}
+    39%{transform:translateY(-1px) rotate(.3deg)}
+    49%{transform:translateY(-8px) rotate(-.4deg)}
+    65%{transform:translateY(0) rotate(.2deg)}
+    74%{transform:translateY(-4px) rotate(-.25deg)}
+    88%{transform:translateY(1px) rotate(0)}
+    100%{transform:translateY(0) rotate(0)}
+  }  .hero .chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px;opacity:0;animation:fade .9s .15s forwards}
   .hero .chips span{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--amber);
     border:1px solid rgba(242,118,30,.35);background:rgba(242,118,30,.08);border-radius:40px;padding:7px 14px;backdrop-filter:blur(6px)}
   .hero h1{font-size:clamp(2.8rem,6.2vw,5.4rem);margin-bottom:15px}
@@ -1349,7 +1365,7 @@ document.querySelectorAll('.faq-q').forEach(function(q){
       if(volando || !enVista || document.hidden) return;
       volando = true;
       logo.classList.add('aletea');
-      setTimeout(function(){ logo.classList.remove('aletea'); volando = false; }, 2000);
+      setTimeout(function(){ logo.classList.remove('aletea'); volando = false; }, 2400);
       programar();
     }
     function programar(){
